@@ -3,179 +3,810 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Thiệp cưới | Minh & Lan</title>
+  <title>Thiệp cưới | Trung Hiếu & Nguyễn Thuận</title>
+  <meta name="description" content="Thiệp mời lễ cưới Trung Hiếu & Nguyễn Thuận" />
+
+  <!-- Font mềm mại -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
-    :root { --bg:#fff; --text:#111; --muted:#666; --card:#f6f6f6; --line:#e6e6e6; }
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; background:linear-gradient(180deg,#fff,#fafafa); color:var(--text);}
-    .wrap{max-width:820px;margin:0 auto;padding:18px;}
-    .hero{padding:22px 16px;border:1px solid var(--line);border-radius:16px;background:var(--bg);}
-    .names{font-size:34px;font-weight:800;letter-spacing:.2px;margin:6px 0 0;}
-    .sub{color:var(--muted);margin:10px 0 0;line-height:1.5}
-    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
-    @media(min-width:720px){ .grid{grid-template-columns:1fr 1fr} }
-    .card{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:14px}
-    .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
-    .value{font-size:16px;font-weight:650;margin-top:6px;line-height:1.45}
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    a.btn,button.btn{appearance:none;border:1px solid var(--line);background:#111;color:#fff;padding:10px 12px;border-radius:12px;text-decoration:none;font-weight:650;cursor:pointer}
-    a.btn.secondary,button.btn.secondary{background:#fff;color:#111}
-    .section{margin-top:16px}
-    .section h2{font-size:18px;margin:0 0 10px}
-    .photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    @media(min-width:720px){ .photos{grid-template-columns:1fr 1fr 1fr} }
-    .ph{aspect-ratio:1/1;border-radius:14px;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);background:#fff}
-    .footer{color:var(--muted);text-align:center;padding:18px 0 8px}
-    .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;background:#111;color:#fff;padding:10px 12px;border-radius:12px;display:none}
+    :root{
+      /* Tươi sáng hơn */
+      --bg1:#fff7fb;
+      --bg2:#fff3e8;
+      --bg3:#f3f0ff;
+
+      --card: rgba(255,255,255,.72);
+      --line: rgba(35,20,45,.10);
+
+      --text:#241528;
+      --muted: rgba(36,21,40,.72);
+
+      --accent:#ff7fbf;
+      --accent2:#ffcf6a;
+      --accent3:#9a86ff;
+
+      --shadow: 0 18px 55px rgba(26, 14, 35, .10);
+      --radius: 18px;
+
+      /* parallax */
+      --px: 0px;
+      --py: 0px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Cormorant Garamond", serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 18% 8%, rgba(255,127,191,.22), transparent 60%),
+        radial-gradient(900px 600px at 82% 15%, rgba(255,207,106,.25), transparent 60%),
+        radial-gradient(900px 600px at 50% 105%, rgba(154,134,255,.20), transparent 60%),
+        linear-gradient(180deg,var(--bg1),var(--bg2) 40%, var(--bg3));
+      overflow-x:hidden;
+    }
+
+    /* sparkles canvas */
+    #sparkles{
+      position:fixed; inset:0;
+      width:100vw; height:100vh;
+      z-index:0;
+      pointer-events:none;
+      opacity:.55;
+    }
+
+    .wrap{max-width:1120px;margin:0 auto;padding:18px; position:relative; z-index:2;}
+    @media(min-width:980px){ .wrap{padding:24px} }
+
+    .topbar{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:10px 2px 16px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border:1px solid var(--line);
+      border-radius:999px;background:rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+    }
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* ===== Splash + Heart ===== */
+    .splash{
+      position:fixed; inset:0; z-index:999;
+      display:flex; align-items:center; justify-content:center;
+      background:
+        radial-gradient(900px 600px at 18% 8%, rgba(255,127,191,.24), transparent 60%),
+        radial-gradient(900px 600px at 82% 15%, rgba(255,207,106,.25), transparent 60%),
+        radial-gradient(900px 600px at 50% 105%, rgba(154,134,255,.20), transparent 60%),
+        linear-gradient(180deg,var(--bg1),var(--bg2) 40%, var(--bg3));
+    }
+    .splash-inner{
+      width:min(560px, 92vw);
+      padding:22px 18px;
+      border-radius: 22px;
+      border:1px solid rgba(35,20,45,.10);
+      background: rgba(255,255,255,.60);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+    .splash-title{
+      font-family:"Great Vibes", cursive;
+      font-size:48px;
+      margin:6px 0 0;
+      color:#2a1530;
+    }
+    .splash-sub{color:var(--muted);line-height:1.6;margin:8px auto 0;max-width:48ch;font-size:16px}
+
+    .heart-btn{
+      width:132px;height:132px;margin:18px auto 10px;border-radius:999px;
+      border:1px solid rgba(35,20,45,.12);
+      background: linear-gradient(135deg, rgba(255,127,191,.92), rgba(255,207,106,.92));
+      box-shadow:
+        0 22px 70px rgba(255,127,191,.25),
+        inset 0 0 30px rgba(255,255,255,.25);
+      display:grid;place-items:center;cursor:pointer;user-select:none;
+      transition: transform .16s ease;
+      position:relative;outline:none;
+    }
+    .heart-btn:hover{transform: translateY(-2px) scale(1.03)}
+    .heart{
+      font-size:58px;
+      transform-origin:center;
+      animation: heartbeat 1.15s infinite;
+      filter: drop-shadow(0 14px 22px rgba(0,0,0,.18));
+    }
+    @keyframes heartbeat{
+      0%{transform:scale(1)}
+      25%{transform:scale(1.18)}
+      50%{transform:scale(1)}
+      75%{transform:scale(1.18)}
+      100%{transform:scale(1)}
+    }
+    .pulse{
+      position:absolute; inset:-10px;border-radius:999px;
+      border:1px solid rgba(35,20,45,.12);opacity:.55;
+      animation:pulse 1.25s ease-in-out infinite;pointer-events:none;
+    }
+    @keyframes pulse{0%{transform:scale(1);opacity:.55}70%{transform:scale(1.22);opacity:0}100%{transform:scale(1.22);opacity:0}}
+
+    .fade-out{animation: fadeOut 520ms ease forwards;}
+    @keyframes fadeOut{to{opacity:0;transform: translateY(8px) scale(.98)}}
+
+    /* ===== MAIN ===== */
+    .main{opacity:0;transform: translateY(10px);transition: opacity .55s ease, transform .55s ease; position:relative; z-index:2;}
+    .main.show{opacity:1;transform: translateY(0);}
+
+    /* ===== HERO FULL SCREEN ===== */
+    .hero{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius: calc(var(--radius) + 10px);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.72)),
+        url("https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;            /* FULL MÀN HÌNH */
+      min-height: 680px;        /* để đẹp trên desktop */
+    }
+    @media(max-width:520px){
+      .hero{min-height: 100vh;}
+    }
+    .hero::after{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(900px 450px at 20% 0%, rgba(255,207,106,.28), transparent 60%),
+        radial-gradient(900px 450px at 80% 15%, rgba(255,127,191,.24), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-inner{position:relative;padding:26px 18px 18px}
+    @media(min-width:760px){ .hero-inner{padding:44px 44px 28px} }
+
+    .badge{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;border:1px solid rgba(35,20,45,.12);
+      border-radius:999px;background:rgba(255,255,255,.60);
+      backdrop-filter: blur(12px);
+      font-size:14px;color:var(--muted);
+    }
+
+    .h1{
+      margin:14px 0 0;
+      font-family:"Great Vibes", cursive;
+      font-size:56px;
+      line-height:1.05;
+      font-weight:400;
+      color:#2a1530;
+      text-shadow: 0 18px 50px rgba(0,0,0,.10);
+    }
+    @media(min-width:760px){ .h1{font-size:84px} }
+    .h1 span{color:var(--accent)}
+
+    .subtitle{
+      margin:10px 0 0;
+      max-width:760px;
+      color:rgba(36,21,40,.80);
+      line-height:1.7;
+      font-size:18px;
+      font-weight:500;
+      background: rgba(255,255,255,.50);
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid rgba(35,20,45,.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn{
+      appearance:none;border:1px solid rgba(35,20,45,.12);
+      background:rgba(255,255,255,.65);
+      color:#2a1530;
+      padding:11px 14px;border-radius:14px;
+      font-weight:800;text-decoration:none;cursor:pointer;
+      display:inline-flex;align-items:center;gap:10px;
+      backdrop-filter: blur(12px);
+      transition: transform .10s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{transform: translateY(-1px);background:rgba(255,255,255,.78);border-color:rgba(35,20,45,.18)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(255,127,191,.95), rgba(255,207,106,.95));
+      color:#2a1530;border-color:rgba(35,20,45,.10);
+      box-shadow: 0 18px 60px rgba(255,127,191,.14);
+    }
+    .btn.primary:hover{background: linear-gradient(135deg, rgba(255,127,191,1), rgba(255,207,106,1))}
+    .btn svg{width:18px;height:18px}
+
+    .cards{
+      display:grid;grid-template-columns:1fr;gap:12px;
+      margin-top:16px;
+      max-width: 980px;
+    }
+    @media(min-width:900px){ .cards{grid-template-columns:1fr 1fr 1fr} }
+    .card{
+      border:1px solid rgba(35,20,45,.10);
+      background: rgba(255,255,255,.62);
+      border-radius: var(--radius);
+      padding:14px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 34px rgba(26, 14, 35, .08);
+    }
+    .card .k{font-size:12px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+    .card .v{margin-top:8px;font-size:18px;font-weight:800;line-height:1.35}
+    .card .s{margin-top:6px;color:var(--muted);font-size:15px;line-height:1.45}
+
+    .section{
+      margin-top:16px;
+      border:1px solid rgba(35,20,45,.10);
+      background: rgba(255,255,255,.62);
+      border-radius: calc(var(--radius) + 10px);
+      padding:14px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 40px rgba(26, 14, 35, .08);
+    }
+    @media(min-width:760px){ .section{padding:18px} }
+
+    .section h2{
+      margin:0 0 12px;
+      font-size:18px;
+      letter-spacing:.02em;
+      color:#2a1530;
+    }
+
+    /* ===== Album mới: 1 ảnh + lời nhắn ===== */
+    .moments{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    .moment{
+      display:grid;
+      grid-template-columns: 160px 1fr;
+      gap:14px;
+      align-items:center;
+      border:1px solid rgba(35,20,45,.10);
+      background: rgba(255,255,255,.60);
+      border-radius: 18px;
+      overflow:hidden;
+    }
+    @media(max-width:560px){
+      .moment{grid-template-columns:1fr;}
+    }
+    .moment img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      display:block;
+    }
+    @media(min-width:760px){
+      .moment img{height:180px;}
+    }
+    .moment-body{padding:12px 14px}
+    .moment-title{
+      font-weight:900;
+      font-size:18px;
+      color:#2a1530;
+      margin:0 0 6px;
+    }
+    .moment-text{
+      margin:0;
+      color:rgba(36,21,40,.76);
+      font-size:16px;
+      line-height:1.6;
+    }
+    .moment-quote{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px dashed rgba(35,20,45,.14);
+      background: rgba(255,255,255,.55);
+      color: rgba(36,21,40,.78);
+      font-style: italic;
+    }
+
+    .footer{text-align:center;color:var(--muted);padding:18px 0 10px;font-size:14px}
+
+    .toast{
+      position:fixed;left:50%;transform:translateX(-50%);
+      bottom:18px;z-index:1600;
+      padding:10px 12px;border-radius:14px;
+      border:1px solid rgba(35,20,45,.12);
+      background: rgba(255,255,255,.80);
+      color:#2a1530;
+      backdrop-filter: blur(14px);
+      display:none;
+      box-shadow: 0 20px 60px rgba(0,0,0,.12);
+      font-weight:900;
+    }
+
+    /* Burst */
+    .burst{position:fixed;inset:0;z-index:1200;pointer-events:none;overflow:hidden}
+    .particle{
+      position:absolute;
+      font-size:18px;
+      will-change:transform,opacity;
+      animation:fly 920ms cubic-bezier(.12,.82,.16,1) forwards;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,.15));
+    }
+    @keyframes fly{
+      0%{transform: translate(var(--x0), var(--y0)) scale(.9); opacity:1}
+      70%{opacity:1}
+      100%{transform: translate(var(--x1), var(--y1)) scale(1.25); opacity:0}
+    }
+
+    /* Music toggle */
+    .music-btn{
+      position:fixed; top:14px; right:14px;
+      z-index:1700;
+      width:46px;height:46px;
+      border-radius:999px;
+      border:1px solid rgba(35,20,45,.12);
+      background: rgba(255,255,255,.75);
+      backdrop-filter: blur(14px);
+      display:grid;place-items:center;
+      cursor:pointer;
+      box-shadow: 0 18px 55px rgba(0,0,0,.10);
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+    }
+    .music-btn:hover{transform: translateY(-1px);background: rgba(255,255,255,.88);border-color:rgba(35,20,45,.18)}
+    .music-btn svg{width:20px;height:20px}
+    .music-on{display:none}
+    .music-btn[data-playing="true"] .music-on{display:block}
+    .music-btn[data-playing="true"] .music-off{display:none}
+
+    /* 3D Petal Rain + Parallax */
+    .petal-stage{
+      position:fixed; inset:0;
+      z-index:1100;
+      pointer-events:none;
+      perspective: 900px;
+      transform-style: preserve-3d;
+      opacity:0;
+      transition: opacity .6s ease;
+    }
+    .petal-stage.show{opacity:1}
+    .petal-layer{
+      position:absolute; inset:0;
+      transform-style: preserve-3d;
+      transform: translate3d(calc(var(--px) * var(--mx)), calc(var(--py) * var(--my)), 0);
+    }
+    .petal3d{
+      position:absolute;
+      top:-30px;
+      left:0;
+      will-change: transform, opacity;
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,.12));
+      opacity: .95;
+      animation: fall3d linear forwards;
+    }
+    @keyframes fall3d{
+      0%{
+        transform:
+          translate3d(var(--x), -40px, var(--z))
+          rotateX(var(--rx))
+          rotateY(var(--ry))
+          rotateZ(0deg)
+          scale(var(--sc));
+        opacity: 0;
+      }
+      10%{opacity: .95}
+      100%{
+        transform:
+          translate3d(calc(var(--x) + var(--drift)), 110vh, var(--z))
+          rotateX(calc(var(--rx) + 360deg))
+          rotateY(calc(var(--ry) + 360deg))
+          rotateZ(720deg)
+          scale(var(--sc));
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #sparkles{display:none}
+      .particle,.petal3d,.heart{animation:none !important}
+    }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <div class="label">Wedding Invitation</div>
-      <div class="names">Minh ❤️ Lan</div>
-      <p class="sub">
-        Trân trọng kính mời bạn đến tham dự lễ cưới của chúng mình.
-      </p>
+  <canvas id="sparkles"></canvas>
 
-      <div class="grid">
-        <div class="card">
-          <div class="label">Thời gian</div>
-          <div class="value">18:00 • Chủ nhật, 10/03/2026</div>
-          <div class="sub" id="countdown"></div>
-        </div>
-        <div class="card">
-          <div class="label">Địa điểm</div>
-          <div class="value">Nhà hàng ABC, 123 Đường XYZ, Quận 1, TP.HCM</div>
-          <div class="sub">Dresscode: lịch sự / sáng màu</div>
-        </div>
-      </div>
+  <!-- Music toggle (hidden until open) -->
+  <button class="music-btn" id="musicBtn" title="Bật/Tắt nhạc" aria-label="Bật/Tắt nhạc"
+          style="display:none" data-playing="false">
+    <svg class="music-on" viewBox="0 0 24 24" fill="none">
+      <path d="M9 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" stroke="currentColor" stroke-width="2"/>
+      <path d="M19 16a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" stroke="currentColor" stroke-width="2"/>
+      <path d="M9 18V6l10-2v12" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <svg class="music-off" viewBox="0 0 24 24" fill="none">
+      <path d="M9 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" stroke="currentColor" stroke-width="2"/>
+      <path d="M19 16a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" stroke="currentColor" stroke-width="2"/>
+      <path d="M9 18V6l10-2v12" stroke="currentColor" stroke-width="2"/>
+      <path d="M4 4l16 16" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </button>
 
-      <div class="btns">
-        <a class="btn" id="btnMap" target="_blank" rel="noreferrer">Mở Google Maps</a>
-        <button class="btn secondary" id="btnCopy">Copy link thiệp</button>
-        <a class="btn secondary" href="#rsvp">Xác nhận tham dự</a>
+  <audio id="bgm" preload="auto" loop></audio>
+
+  <div class="petal-stage" id="petalStage">
+    <div class="petal-layer" id="petalLayerFar" style="--mx:.20; --my:.14;"></div>
+    <div class="petal-layer" id="petalLayerMid" style="--mx:.38; --my:.26;"></div>
+    <div class="petal-layer" id="petalLayerNear" style="--mx:.55; --my:.38;"></div>
+  </div>
+
+  <!-- Splash (mở trực tiếp, không intro) -->
+  <div class="splash" id="splash">
+    <div class="splash-inner" id="splashInner">
+      <div class="small" style="letter-spacing:.14em;text-transform:uppercase;">Xin chào</div>
+      <div class="splash-title" id="splashNames">Trung Hiếu ❤️ Nguyễn Thuận</div>
+      <div class="splash-sub">Chạm vào trái tim để mở thiệp mời ✨</div>
+
+      <button class="heart-btn" id="heartBtn" aria-label="Open invitation">
+        <span class="pulse"></span>
+        <span class="heart" id="heartIcon">❤️</span>
+      </button>
+
+      <div class="small" style="margin-top:6px; font-weight:900;color:rgba(36,21,40,.65);">
+        Hẹn gặp bạn trong ngày vui của chúng mình
       </div>
     </div>
+  </div>
 
-    <div class="section">
-      <h2>Album</h2>
-      <div class="photos">
-        <div class="ph">Ảnh 1</div>
-        <div class="ph">Ảnh 2</div>
-        <div class="ph">Ảnh 3</div>
+  <div class="burst" id="burst"></div>
+
+  <div class="main" id="main">
+    <div class="wrap">
+      <div class="topbar">
+        <div class="pill"><span class="dot"></span> Thiệp cưới online</div>
+        <div class="small" id="siteUrl"></div>
       </div>
-      <p class="sub">Bạn có thể thay khung “Ảnh 1/2/3” bằng ảnh thật (mình hướng dẫn bên dưới).</p>
-    </div>
 
-    <div class="section" id="rsvp">
-      <h2>Xác nhận tham dự (RSVP)</h2>
-      <div class="card" style="background:#fff">
-        <div class="sub" style="margin:0 0 10px">
-          Điền nhanh, hệ thống sẽ mở Zalo/Email để bạn gửi (không cần backend).
+      <header class="hero">
+        <div class="hero-inner">
+          <div class="badge"><span style="color:var(--accent2);font-weight:900">💍</span> Trân trọng kính mời bạn đến dự lễ cưới</div>
+
+          <div class="h1" id="titleName">Trung Hiếu <span>❤️</span> Nguyễn Thuận</div>
+
+          <p class="subtitle">
+            Sự hiện diện của bạn là niềm vinh hạnh cho gia đình chúng mình.
+            Hẹn gặp bạn trong ngày vui thật ấm áp và trọn vẹn.
+          </p>
+
+          <div class="cta">
+            <a class="btn primary" id="btnMap" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 10.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              Mở Google Maps
+            </a>
+            <button class="btn" id="btnCopy">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 7h10a2 2 0 0 1 2 2v10" stroke="currentColor" stroke-width="2"/>
+                <path d="M6 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 9h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V11a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              Copy link thiệp
+            </button>
+          </div>
+
+          <div class="cards">
+            <div class="card">
+              <div class="k">Thời gian</div>
+              <div class="v" id="timeText">18:00 • Chủ nhật, 10/03/2026</div>
+              <div class="s" id="countdown">Đang tính thời gian…</div>
+            </div>
+            <div class="card">
+              <div class="k">Địa điểm</div>
+              <div class="v" id="placeText">Nhà hàng ABC</div>
+              <div class="s" id="addrText">123 Đường XYZ, Quận 1, TP.HCM</div>
+            </div>
+            <div class="card">
+              <div class="k">Gợi ý</div>
+              <div class="v">Dresscode</div>
+              <div class="s">Lịch sự / sáng màu • Đến trước 15 phút để check-in</div>
+            </div>
+          </div>
         </div>
+      </header>
 
-        <form id="formRsvp">
-          <div style="display:grid;gap:10px;grid-template-columns:1fr;">
-            <div>
-              <div class="label">Tên của bạn</div>
-              <input required name="name" style="width:100%;padding:10px;border-radius:12px;border:1px solid var(--line);margin-top:6px" />
-            </div>
-            <div>
-              <div class="label">Số người tham dự</div>
-              <input required name="guests" type="number" min="1" value="1"
-                     style="width:100%;padding:10px;border-radius:12px;border:1px solid var(--line);margin-top:6px" />
-            </div>
-            <div>
-              <div class="label">Ghi chú</div>
-              <input name="note" placeholder="Ví dụ: ăn chay / đến muộn..."
-                     style="width:100%;padding:10px;border-radius:12px;border:1px solid var(--line);margin-top:6px" />
+      <!-- Album: khoảnh khắc + lời nhắn -->
+      <section class="section">
+        <h2>Khoảnh khắc của chúng mình</h2>
+
+        <div class="moments">
+          <div class="moment">
+            <img src="img/1.jpg" alt="Khoảnh khắc 1">
+            <div class="moment-body">
+              <div class="moment-title">Khoảnh khắc 1 • Lần đầu gặp gỡ</div>
+              <p class="moment-text">
+                Có những cuộc gặp gỡ tưởng như tình cờ, nhưng lại là khởi đầu cho cả một đời thương yêu.
+              </p>
+              <div class="moment-quote">“Tình yêu bắt đầu từ một ánh nhìn, lớn lên bằng sự thấu hiểu.”</div>
             </div>
           </div>
 
-          <div class="btns" style="margin-top:12px">
-            <button class="btn" type="submit">Gửi RSVP qua Zalo</button>
-            <button class="btn secondary" type="button" id="btnMail">Gửi qua Email</button>
+          <div class="moment">
+            <img src="img/2.jpg" alt="Khoảnh khắc 2">
+            <div class="moment-body">
+              <div class="moment-title">Khoảnh khắc 2 • Cùng nhau trưởng thành</div>
+              <p class="moment-text">
+                Chúng mình học cách lắng nghe, nhường nhịn, và chọn nhau — mỗi ngày một lần nữa.
+              </p>
+              <div class="moment-quote">“Bình yên là khi có nhau, dù ngày dài hay trời mưa.”</div>
+            </div>
           </div>
-        </form>
-      </div>
-    </div>
 
-    <div class="footer">Hẹn gặp bạn trong ngày vui của chúng mình 💖</div>
+          <div class="moment">
+            <img src="img/3.jpg" alt="Khoảnh khắc 3">
+            <div class="moment-body">
+              <div class="moment-title">Khoảnh khắc 3 • Về chung một nhà</div>
+              <p class="moment-text">
+                Hôm nay, chúng mình viết tiếp câu chuyện bằng một lời hứa: đi cùng nhau đến tận cùng hạnh phúc.
+              </p>
+              <div class="moment-quote">“Từ nay, nhà là nơi có em — và anh.”</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">Hẹn gặp bạn trong ngày vui của chúng mình 💛</div>
+    </div>
   </div>
 
   <div class="toast" id="toast">Đã copy!</div>
 
   <script>
-    // ====== CONFIG ======
+    // =========================
+    // CONFIG (SỬA Ở ĐÂY)
+    // =========================
+    const GROOM = "Trung Hiếu";
+    const BRIDE = "Nguyễn Thuận";
+    const COUPLE_NAME = `${GROOM} ❤️ ${BRIDE}`;
+
     const WEDDING_DATE_ISO = "2026-03-10T18:00:00+07:00";
+    const TIME_TEXT = "18:00 • Chủ nhật, 10/03/2026";
+
+    const PLACE_NAME = "Nhà hàng ABC";
+    const ADDRESS_TEXT = "123 Đường XYZ, Quận 1, TP.HCM";
     const GOOGLE_MAPS_LINK = "https://maps.google.com/?q=Nh%C3%A0+h%C3%A0ng+ABC+Qu%E1%BA%ADn+1";
-    const ZALO_NUMBER = "84901234567"; // đổi số của bạn (84 + số)
-    const EMAIL_TO = "ban@domain.com";  // đổi email của bạn
 
-    // Maps button
+    const MUSIC_SRC = "audio/song.mp3";
+    const MUSIC_DEFAULT_ON = true;
+
+    // INIT
+    document.title = `Thiệp cưới | ${GROOM} & ${BRIDE}`;
+    document.getElementById("titleName").innerHTML = `${GROOM} <span>❤️</span> ${BRIDE}`;
+    document.getElementById("splashNames").textContent = COUPLE_NAME;
+
+    document.getElementById("timeText").textContent = TIME_TEXT;
+    document.getElementById("placeText").textContent = PLACE_NAME;
+    document.getElementById("addrText").textContent = ADDRESS_TEXT;
+
     document.getElementById("btnMap").href = GOOGLE_MAPS_LINK;
+    document.getElementById("siteUrl").textContent = location.href;
 
-    // Copy link button
-    document.getElementById("btnCopy").addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(location.href);
-        showToast("Đã copy link thiệp!");
-      } catch {
-        showToast("Không copy được — hãy copy thủ công trên thanh địa chỉ.");
+    // MUSIC
+    const bgm = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
+    bgm.src = MUSIC_SRC;
+
+    function setMusicUI(isPlaying){ musicBtn.dataset.playing = isPlaying ? "true" : "false"; }
+    async function playMusic(){
+      try{ await bgm.play(); setMusicUI(true); }
+      catch(e){ setMusicUI(false); showToast("Chạm nút 🎵 để bật nhạc"); }
+    }
+    function pauseMusic(){ bgm.pause(); setMusicUI(false); }
+    musicBtn.addEventListener("click", async () => {
+      if (bgm.paused) await playMusic(); else pauseMusic();
+    });
+
+    // SPLASH -> MAIN + BURST + PETALS
+    const splash = document.getElementById("splash");
+    const splashInner = document.getElementById("splashInner");
+    const heartBtn = document.getElementById("heartBtn");
+    const burstLayer = document.getElementById("burst");
+    const main = document.getElementById("main");
+
+    const petalStage = document.getElementById("petalStage");
+    const layerFar = document.getElementById("petalLayerFar");
+    const layerMid = document.getElementById("petalLayerMid");
+    const layerNear = document.getElementById("petalLayerNear");
+
+    let opened = false;
+    heartBtn.addEventListener("click", async () => {
+      if (opened) return;
+      opened = true;
+
+      // Burst
+      const rect = heartBtn.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      const emojis = ["❤️","💖","💗","💘","✨","🌸","🌺","💐","💍"];
+      const count = 60;
+
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        const angle = (Math.PI * 2) * (i / count) + (Math.random() * 0.55);
+        const radius = 220 + Math.random() * 340;
+
+        const x0 = cx + (Math.random()*14-7);
+        const y0 = cy + (Math.random()*14-7);
+        const x1 = cx + Math.cos(angle) * radius;
+        const y1 = cy + Math.sin(angle) * radius;
+
+        p.style.left = "0px";
+        p.style.top = "0px";
+        p.style.setProperty("--x0", `${x0}px`);
+        p.style.setProperty("--y0", `${y0}px`);
+        p.style.setProperty("--x1", `${x1}px`);
+        p.style.setProperty("--y1", `${y1}px`);
+        p.style.animationDelay = `${Math.random() * 80}ms`;
+        p.style.fontSize = (14 + Math.random()*16) + "px";
+
+        burstLayer.appendChild(p);
+        p.addEventListener("animationend", () => p.remove());
       }
+
+      // Petal rain
+      petalStage.classList.add("show");
+      startPetalRain3D();
+      setTimeout(() => { petalStage.classList.remove("show"); }, 5200);
+
+      // fade splash -> main
+      splashInner.classList.add("fade-out");
+      setTimeout(() => {
+        splash.style.display = "none";
+        main.classList.add("show");
+        musicBtn.style.display = "grid";
+      }, 520);
+
+      // music after user interaction
+      if (MUSIC_DEFAULT_ON) await playMusic(); else setMusicUI(false);
+    });
+
+    // Petals
+    function spawnPetal(layer, depth){
+      const petals = ["🌸","🌺","💮","🌷","🌹"];
+      const el = document.createElement("div");
+      el.className = "petal3d";
+      el.textContent = petals[(Math.random()*petals.length)|0];
+
+      const x = Math.random()*100;
+      const z = depth;
+      const dur = 3.6 + Math.random()*3.8;
+      const size = (14 + Math.random()*18) * (depth > -120 ? 1.15 : 0.9);
+      const drift = (Math.random()*160 - 80) + "px";
+      const rx = (Math.random()*80 - 40) + "deg";
+      const ry = (Math.random()*80 - 40) + "deg";
+      const sc = (0.75 + Math.random()*0.55) * (depth > -120 ? 1.10 : 0.90);
+
+      el.style.left = x + "vw";
+      el.style.fontSize = size + "px";
+      el.style.animationDuration = dur + "s";
+
+      el.style.setProperty("--x", (x) + "vw");
+      el.style.setProperty("--z", z + "px");
+      el.style.setProperty("--drift", drift);
+      el.style.setProperty("--rx", rx);
+      el.style.setProperty("--ry", ry);
+      el.style.setProperty("--sc", sc);
+
+      layer.appendChild(el);
+      setTimeout(() => el.remove(), (dur*1000) + 200);
+    }
+
+    function startPetalRain3D(){
+      let made = 0;
+      const max = 72;
+      const timer = setInterval(() => {
+        spawnPetal(layerFar,  -220 - Math.random()*120);
+        spawnPetal(layerMid,  -140 - Math.random()*80);
+        spawnPetal(layerNear,  -60  - Math.random()*50);
+        made += 3;
+        if (made >= max) clearInterval(timer);
+      }, 130);
+    }
+
+    function setParallax(dx, dy){
+      const px = Math.max(-16, Math.min(16, dx)) + "px";
+      const py = Math.max(-16, Math.min(16, dy)) + "px";
+      document.documentElement.style.setProperty("--px", px);
+      document.documentElement.style.setProperty("--py", py);
+    }
+    window.addEventListener("mousemove", (e) => {
+      const cx = window.innerWidth/2, cy = window.innerHeight/2;
+      setParallax((e.clientX - cx)/cx*14, (e.clientY - cy)/cy*14);
+    });
+    window.addEventListener("deviceorientation", (e) => {
+      if (e.beta == null || e.gamma == null) return;
+      setParallax((e.gamma/45)*12, (e.beta/45)*12);
+    }, true);
+
+    // Copy link
+    document.getElementById("btnCopy").addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(location.href); showToast("Đã copy link thiệp!"); }
+      catch { showToast("Không copy được — hãy copy thủ công."); }
     });
 
     // Countdown
     const countdownEl = document.getElementById("countdown");
-    function tick() {
-      const t = new Date(WEDDING_DATE_ISO).getTime() - Date.now();
-      if (t <= 0) { countdownEl.textContent = "Hôm nay là ngày cưới 🎉"; return; }
-      const d = Math.floor(t / 86400000);
-      const h = Math.floor((t % 86400000) / 3600000);
-      const m = Math.floor((t % 3600000) / 60000);
+    function tick(){
+      const diff = new Date(WEDDING_DATE_ISO).getTime() - Date.now();
+      if (diff <= 0){ countdownEl.textContent = "Hôm nay là ngày cưới 🎉"; return; }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
       countdownEl.textContent = `Còn ${d} ngày ${h} giờ ${m} phút`;
     }
     tick(); setInterval(tick, 1000);
-
-    // RSVP -> open Zalo chat (fallback to SMS/WhatsApp style links aren't universal; simplest is copy message)
-    const form = document.getElementById("formRsvp");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      const msg =
-`RSVP thiệp cưới
-- Tên: ${fd.get("name")}
-- Số người: ${fd.get("guests")}
-- Ghi chú: ${fd.get("note") || "(không)"}`;
-
-      // Try open Zalo with URL scheme (works on some devices), otherwise copy
-      const zaloUrl = `https://zalo.me/${ZALO_NUMBER}`;
-      window.open(zaloUrl, "_blank");
-      navigator.clipboard?.writeText(msg);
-      showToast("Đã mở Zalo & copy nội dung RSVP!");
-    });
-
-    // RSVP -> Email
-    document.getElementById("btnMail").addEventListener("click", () => {
-      const fd = new FormData(form);
-      const subject = encodeURIComponent("RSVP thiệp cưới Minh & Lan");
-      const body = encodeURIComponent(
-`Xin chào,
-Mình xác nhận tham dự:
-- Tên: ${fd.get("name") || ""}
-- Số người: ${fd.get("guests") || "1"}
-- Ghi chú: ${fd.get("note") || "(không)"}
-`);
-      location.href = `mailto:${EMAIL_TO}?subject=${subject}&body=${body}`;
-    });
 
     function showToast(text){
       const t = document.getElementById("toast");
       t.textContent = text;
       t.style.display = "block";
       clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(()=>t.style.display="none", 1800);
+      window.__toastTimer = setTimeout(()=>t.style.display="none", 1900);
     }
+
+    // Sparkles (nhẹ hơn)
+    const canvas = document.getElementById("sparkles");
+    const ctx = canvas.getContext("2d");
+    let W=0,H=0, DPR=1;
+    function resize(){
+      DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      W = canvas.width  = Math.floor(window.innerWidth * DPR);
+      H = canvas.height = Math.floor(window.innerHeight * DPR);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+    }
+    window.addEventListener("resize", resize); resize();
+
+    const stars = [];
+    const STAR_COUNT = 70;
+    const rand = (a,b)=>a+Math.random()*(b-a);
+
+    for(let i=0;i<STAR_COUNT;i++){
+      stars.push({ x:rand(0,W), y:rand(0,H), r:rand(0.6,1.8)*DPR, a:rand(0.10,0.55), tw:rand(0.004,0.012),
+        vx:rand(-0.012,0.012)*DPR, vy:rand(0.008,0.035)*DPR
+      });
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(const s of stars){
+        s.a += s.tw * (Math.random()>0.5?1:-1);
+        s.a = Math.max(0.08, Math.min(0.60, s.a));
+        s.x += s.vx; s.y += s.vy;
+        if(s.y > H+20) { s.y = -20; s.x = rand(0,W); }
+        if(s.x < -20) s.x = W+20;
+        if(s.x > W+20) s.x = -20;
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
   </script>
 </body>
 </html>
