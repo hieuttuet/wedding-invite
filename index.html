@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Thiệp cưới | Trung Hiếu & Nguyễn Thuận</title>
-  <meta name="description" content="Thiệp mời lễ cưới Trung Hiếu & Nguyễn Thuận" />
+  <title>Thiệp cưới | Trần Hiếu & Quỳnh Thuận</title>
+  <meta name="description" content="Thiệp mời lễ cưới Trần Hiếu & Quỳnh Thuận" />
 
-  <!-- Font giống thiệp: serif + script mềm -->
+  <!-- Font premium: serif + script mềm -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -27,6 +27,10 @@
 
       --r: 18px;
       --rBig: 26px;
+
+      /* parallax vars */
+      --px: 0px;
+      --py: 0px;
     }
 
     *{box-sizing:border-box}
@@ -39,12 +43,27 @@
       overflow-x:hidden;
     }
 
+    /* subtle bright background glow */
+    body::before{
+      content:"";
+      position:fixed; inset:-40px;
+      background:
+        radial-gradient(900px 600px at 15% 10%, rgba(255,184,206,.34), transparent 60%),
+        radial-gradient(900px 600px at 85% 18%, rgba(255,224,170,.28), transparent 62%),
+        radial-gradient(900px 600px at 50% 110%, rgba(205,228,255,.30), transparent 60%);
+      pointer-events:none;
+      z-index:-2;
+      filter: blur(2px);
+    }
+
     .page{
       max-width: 980px;
       margin: 0 auto;
       background: var(--paper);
       box-shadow: var(--shadow);
       min-height:100vh;
+      position:relative;
+      z-index:2;
     }
 
     .section{padding: 18px 18px;}
@@ -89,7 +108,6 @@
       .cover-grid{ grid-template-columns: 1.25fr .75fr; gap: 18px; }
     }
 
-    /* ---- HERO FRAME: bo góc + viền giống mẫu ---- */
     .hero-frame{
       position:relative;
       background:#fff;
@@ -97,53 +115,42 @@
       overflow:hidden;
       box-shadow: var(--shadow2);
       min-height: 430px;
-      border: 10px solid #fff;              /* viền trắng dày giống thiệp */
+      border: 10px solid #fff;
       outline: 1px solid rgba(255,255,255,.45);
     }
     @media(min-width:820px){ .hero-frame{min-height: 520px;} }
 
     .hero-arc{
-  position:absolute;
-  inset: 0;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  padding: 0 14px 0;   /* bỏ padding dưới để không “đẩy” ảnh lên */
-}
+      position:absolute;
+      inset: 0;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding: 0 14px 0;
+    }
+    .hero-arc::before{
+      content:"";
+      position:absolute;
+      width: 132%;
+      height: 132%;
+      left:50%;
+      transform: translateX(-50%);
+      top: -46%;
+      background: #d9d9d9;
+      border-radius: 999px;
+    }
+    .hero-photo{
+      position:relative;
+      z-index:1;
+      display:block;
+      width:auto;
+      height:100%;
+      max-height:100%;
+      object-fit:contain;
+      align-self:flex-end;
+      max-width: 92%;
+    }
 
-/* vòng cung xám */
-.hero-arc::before{
-  content:"";
-  position:absolute;
-  width: 132%;
-  height: 132%;
-  left:50%;
-  transform: translateX(-50%);
-  top: -46%;
-  background: #d9d9d9;
-  border-radius: 999px;
-}
-
-/* Ảnh: ưu tiên thấy đủ người */
-.hero-photo{
-  position:relative;
-  z-index:1;
-  display:block;
-
-  /* QUAN TRỌNG: không dùng crop */
-  width: auto;
-  height: 100%;
-  max-height: 100%;
-  object-fit: contain;
-
-  /* canh xuống đáy giống mẫu */
-  align-self: flex-end;
-
-  /* giới hạn bề ngang để không tràn */
-  max-width: 92%;
-}
-
-    /* ---- I LOVE YOU cong chuẩn SVG path ---- */
     .love-arc{
       position:absolute;
       left: 10px;
@@ -162,7 +169,6 @@
       fill: rgba(255,255,255,.95);
     }
 
-    /* ---- ICON hoa nét mảnh bên trái giống mẫu ---- */
     .line-flower{
       position:absolute;
       left: 10px;
@@ -170,19 +176,18 @@
       width: 54px;
       height: 54px;
       z-index:3;
-      opacity:.85;
+      opacity:.90;
       pointer-events:none;
       filter: drop-shadow(0 8px 18px rgba(0,0,0,.18));
     }
     .line-flower path{
-      stroke: rgba(255,255,255,.95);
+      stroke: rgba(255,255,255,.96);
       stroke-width: 1.6;
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
-    /* ---- khối info bên phải ---- */
     .cover-info{
       color:#fff;
       display:flex;
@@ -218,12 +223,9 @@
       letter-spacing:.08em;
     }
 
-    /* ---- phần trắng dưới cover ---- */
     .cover-bottom{
       background:#fff;
       padding: 18px 18px 26px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
     }
     @media(min-width:768px){ .cover-bottom{padding: 22px 34px 34px;} }
 
@@ -314,23 +316,62 @@
       color: var(--muted);
     }
 
-    .triple-photos{
+    /* VIP: khoảnh khắc + lời nhắn (ảnh + text) */
+    .moments{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    .moment{
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow:hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,.08);
+      background:#fff;
       display:grid;
       grid-template-columns: 1fr;
-      gap: 14px;
-      margin-top: 14px;
     }
-    @media(min-width:820px){ .triple-photos{grid-template-columns: 1fr 1fr 1fr;} }
-
-    .phbox{
-      background:#fff;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      overflow:hidden;
-      box-shadow: 0 10px 26px rgba(0,0,0,.10);
+    @media(min-width:820px){
+      .moment{ grid-template-columns: 1.05fr .95fr; }
+      .moment.reverse{ grid-template-columns: .95fr 1.05fr; }
+      .moment.reverse .m-photo{ order:2; }
+      .moment.reverse .m-text{ order:1; }
     }
-    .phbox img{width:100%; height: 240px; object-fit:cover; display:block;}
-    @media(min-width:820px){ .phbox img{height: 220px;} }
+    .m-photo img{
+      width:100%;
+      height: 320px;
+      object-fit:cover;
+      display:block;
+    }
+    @media(min-width:820px){ .m-photo img{ height: 320px; } }
+    .m-text{
+      padding: 14px 14px 16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:10px;
+    }
+    .m-title{
+      font-family:"Playfair Display", serif;
+      font-weight:800;
+      color: var(--wine);
+      letter-spacing:.04em;
+      font-size: 18px;
+      margin:0;
+    }
+    .m-quote{
+      margin:0;
+      color: rgba(28,15,20,.78);
+      font-size: 18px;
+      line-height:1.7;
+    }
+    .m-sign{
+      font-family:"Great Vibes", cursive;
+      color: rgba(110,20,20,.92);
+      font-size: 34px;
+      margin-top: 2px;
+    }
 
     .main-time{
       text-align:center;
@@ -373,13 +414,18 @@
       margin-top: 16px;
     }
     @media(min-width:820px){ .party-grid{grid-template-columns:1fr 1fr; gap: 18px;} }
-
+@media(max-width:480px){
+  .splash-title{
+    white-space:normal;   /* mobile cho xuống dòng */
+    font-size:36px;
+  }
+}
     .party{
       border: 1px solid var(--line2);
       border-radius: 18px;
       padding: 14px;
       position:relative;
-      background: rgba(255,255,255,.90);
+      background: rgba(255,255,255,.92);
       box-shadow: 0 10px 28px rgba(0,0,0,.08);
       overflow:hidden;
     }
@@ -399,7 +445,7 @@
     .party .p-sub{margin-top: 6px; color: var(--muted);}
 
     /* =========================
-       CALENDAR (FORM 3) - spacing như mẫu
+       CALENDAR (FORM 3)
     ========================= */
     .cal{
       margin-top: 18px;
@@ -419,12 +465,12 @@
     }
     .cal-body{
       padding: 14px 14px 18px;
-      border-top: 3px solid rgba(0,0,0,.10); /* đường kẻ ngang giống mẫu */
+      border-top: 3px solid rgba(0,0,0,.10);
     }
     .cal-grid{
       display:grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 18px;              /* spacing như mẫu (thoáng) */
+      gap: 18px;
       padding: 10px 6px 0;
       color: #111;
       font-weight:700;
@@ -438,9 +484,8 @@
       position:relative;
       border-radius: 8px;
     }
-    .day.muted{opacity:.0}     /* ẩn ô trống để giống mẫu (chỉ thấy số) */
+    .day.muted{opacity:.0}
 
-    /* tim ngày 5 dạng outline */
     .mark-heart{
       position:absolute;
       inset: -8px;
@@ -453,7 +498,6 @@
       color: rgba(110,20,20,.85);
       transform: translateY(-1px);
     }
-    /* dấu tay đỏ ngày 6 (mô phỏng bằng emoji tim + blur nhẹ) */
     .mark-fingerprint{
       position:absolute;
       inset:-10px;
@@ -514,23 +558,237 @@
     }
 
     /* =========================
-       Splash + burst + music
+       VIP FX: petals + sparkles
     ========================= */
-    .burst{position:fixed; inset:0; z-index:1200; pointer-events:none; overflow:hidden}
-    .particle{
-      position:absolute; font-size:18px;
-      will-change: transform, opacity;
-      animation: fly 860ms cubic-bezier(.12,.82,.16,1) forwards;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.18));
+
+    /* sparkles layer */
+    #sparkles{
+      position:fixed; inset:0;
+      width:100vw; height:100vh;
+      z-index:0;
+      pointer-events:none;
+      opacity:.35;
     }
-    @keyframes fly{
-      0%{transform: translate(var(--x0), var(--y0)) scale(.9); opacity:1}
-      100%{transform: translate(var(--x1), var(--y1)) scale(1.2); opacity:0}
+
+    /* petal stage */
+    #petalStage{
+      position:fixed; inset:0;
+      z-index:1500;
+      pointer-events:none;
+      perspective: 900px;
+      transform-style: preserve-3d;
+      opacity:0;
+      transition: opacity .55s ease;
+    }
+    #petalStage.show{opacity:1;}
+    .petal-layer{
+      position:absolute; inset:0;
+      transform-style: preserve-3d;
+      transform: translate3d(calc(var(--px) * var(--mx)), calc(var(--py) * var(--my)), 0);
+    }
+
+    /* Petal element (SVG background) */
+    .petal{
+      position:absolute;
+      left:0; top:-40px;
+      width: 22px; height: 22px;
+      will-change: transform, opacity;
+      opacity:.95;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.12));
+      background-repeat:no-repeat;
+      background-size:contain;
+      background-position:center;
+    }
+
+    /* burst petals (from heart) */
+    .petal.burst{
+      top:0;
+      animation: petalBurst 1050ms cubic-bezier(.12,.82,.16,1) forwards;
+    }
+    @keyframes petalBurst{
+      0%{
+        transform:
+          translate3d(var(--x0), var(--y0), 0)
+          rotate(var(--r0))
+          scale(.65);
+        opacity: 1;
+      }
+      70%{opacity: 1;}
+      100%{
+        transform:
+          translate3d(var(--x1), var(--y1), 0)
+          rotate(var(--r1))
+          scale(1.25);
+        opacity: 0;
+      }
+    }
+
+    /* rain petals */
+    .petal.rain{
+      animation: petalRain linear forwards;
+    }
+    @keyframes petalRain{
+      0%{
+        transform:
+          translate3d(var(--x), -50px, var(--z))
+          rotateX(var(--rx))
+          rotateY(var(--ry))
+          rotateZ(var(--rz))
+          scale(var(--sc));
+        opacity: 0;
+      }
+      10%{opacity:.95}
+      100%{
+        transform:
+          translate3d(calc(var(--x) + var(--drift)), 115vh, var(--z))
+          rotateX(calc(var(--rx) + 360deg))
+          rotateY(calc(var(--ry) + 360deg))
+          rotateZ(calc(var(--rz) + 720deg))
+          scale(var(--sc));
+        opacity: 0;
+      }
+    }
+
+    /* =========================
+       Splash + transitions + music
+    ========================= */
+    #splash{
+  position:fixed; inset:0; z-index:2000;
+  display:flex; align-items:center; justify-content:center;
+
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(255,210,210,.25), transparent 60%),
+    radial-gradient(900px 600px at 80% 20%, rgba(255,230,190,.20), transparent 60%),
+    linear-gradient(180deg,#6e1414,#4a0e0e);
+
+  transition: opacity .9s ease, transform .9s ease;
+}
+
+#splash.fade{
+  opacity:0;
+  transform: scale(.96);
+}
+
+#splashInner{
+  width:min(520px, 92vw);
+  padding:28px 20px;
+  border-radius:24px;
+
+  background: rgba(255,255,255,.92);
+  color: var(--wine);
+
+  border:1px solid rgba(110,20,20,.25);
+  box-shadow: 0 30px 90px rgba(0,0,0,.25);
+
+  text-align:center;
+
+  transition: all .8s cubic-bezier(.22,.61,.36,1);
+}
+
+#splashInner.out{
+  opacity:0;
+  transform: translateY(20px) scale(.92);
+}
+
+/* viền trang trí */
+.splash-border{
+  border:1px solid rgba(110,20,20,.18);
+  border-radius:18px;
+  padding:18px 14px;
+  position:relative;
+}
+
+.splash-border::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border:1px dashed rgba(110,20,20,.18);
+  border-radius:14px;
+}
+
+/* chữ */
+.splash-top{
+  font-family:"Playfair Display", serif;
+  letter-spacing:.18em;
+  font-size:12px;
+  opacity:.7;
+}
+
+.splash-title{
+  font-family:"Great Vibes", cursive;
+  font-size:48px;
+  margin:8px 0;
+  line-height:1.2;
+
+  white-space:nowrap;   /* 🔥 không cho xuống dòng */
+}
+
+.splash-sub{
+  font-size:14px;
+  opacity:.75;
+  margin-bottom:12px;
+}
+
+/* heart button VIP */
+#heartBtn{
+  width:140px;height:140px;
+  margin:18px auto 12px;
+  border-radius:999px;
+
+  border:1px solid rgba(110,20,20,.28);
+
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.4)),
+    linear-gradient(135deg,#ffd7d7,#fff);
+
+  box-shadow:
+    0 25px 70px rgba(110,20,20,.35),
+    inset 0 0 30px rgba(255,255,255,.5);
+
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+
+  transition: all .15s ease;
+}
+
+#heartBtn:hover{
+  transform: scale(1.05);
+  box-shadow:
+    0 30px 90px rgba(110,20,20,.4),
+    inset 0 0 35px rgba(255,255,255,.6);
+}
+
+#heartIcon{
+  font-size:64px;
+  color:#c4142a;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+
+  animation: heartBeat 1.2s ease-in-out infinite;
+}
+    @keyframes heartBeat{
+      0%{transform:scale(1)}
+      25%{transform:scale(1.18)}
+      50%{transform:scale(1)}
+      75%{transform:scale(1.18)}
+      100%{transform:scale(1)}
+    }
+
+    /* main appear */
+    #main{
+      display:none;
+      opacity:0;
+      transform: translateY(18px);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+    #main.show{
+      opacity:1;
+      transform: translateY(0);
     }
 
     .music-btn{
       position:fixed; top:14px; right:14px;
-      z-index:1700;
+      z-index:2100;
       width:46px;height:46px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.35);
@@ -552,7 +810,7 @@
 
     .toast{
       position:fixed;left:50%;transform:translateX(-50%);
-      bottom:18px;z-index:1600;
+      bottom:18px;z-index:2200;
       padding:10px 12px;border-radius:14px;
       border:1px solid rgba(110,20,20,.18);
       background: rgba(255,255,255,.92);
@@ -564,12 +822,196 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .particle{animation:none!important}
+      #sparkles, #petalStage{display:none !important}
+      #heartIcon{animation:none !important}
+      .petal{animation:none !important}
+      #splash, #splashInner, #main{transition:none !important}
     }
+	/* ================= CINEMATIC UPGRADE ================= */
+
+/* blur + zoom splash */
+#splash{
+  transition: all 1.4s cubic-bezier(.22,.61,.36,1);
+}
+
+#splash.fade{
+  opacity:0;
+  transform: scale(1.08);
+  filter: blur(14px);
+}
+
+/* main blur appear */
+#main{
+  filter: blur(12px);
+}
+
+#main.show{
+  filter: blur(0);
+}
+
+/* background zoom */
+body.opening::before{
+  animation: bgZoom 2.5s ease forwards;
+}
+
+@keyframes bgZoom{
+  0%{transform: scale(1)}
+  100%{transform: scale(1.1)}
+}
+
+/* camera shake */
+@keyframes shake{
+  0%{transform: translate(0,0)}
+  25%{transform: translate(-5px,4px)}
+  50%{transform: translate(4px,-3px)}
+  75%{transform: translate(-3px,2px)}
+  100%{transform: translate(0,0)}
+}
+
+.shake{
+  animation: shake .4s ease;
+}
+
+/* typewriter */
+.typewriter span{
+  opacity:0;
+  transform: translateY(10px);
+  display:inline-block;
+}
+
+.typewriter span.show{
+  opacity:1;
+  transform: translateY(0);
+  transition: all .4s ease;
+}
+/* ===== Premium Title FX ===== */
+.fx-title{
+  position:relative;
+  display:inline-block;
+  width:min(560px, 92vw);
+  margin: 6px auto 0;
+  padding: 6px 10px;
+  line-height:1.1;
+  transform: translateZ(0);
+}
+
+.fx-title .fx-stroke{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:visible;
+  pointer-events:none;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,.10));
+  opacity:0;
+}
+
+.fx-title .fx-stroke text{
+  font-family:"Great Vibes", cursive;
+  font-size: 150px;              /* sẽ auto-fit ở JS */
+  fill: transparent;
+  stroke: rgba(110,20,20,.78);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+}
+
+/* lớp fill ký tự */
+.fx-title .fx-fill{
+  position:relative;
+  z-index:2;
+  font-family:"Great Vibes", cursive;
+  font-size:48px;
+  color: var(--wine);
+  text-align:center;
+  white-space:nowrap;
+  max-width:100%;
+  overflow:hidden;
+  filter: drop-shadow(0 12px 26px rgba(0,0,0,.10));
+}
+
+/* span ký tự */
+.fx-title .fx-fill span{
+  display:inline-block;
+  opacity:0;
+  transform: translateY(10px) scale(.985);
+  filter: blur(6px);
+  will-change: transform, opacity, filter;
+  animation: charIn 780ms cubic-bezier(.18,.86,.18,1) forwards;
+}
+@keyframes charIn{
+  0%{opacity:0; transform:translateY(12px) scale(.985); filter:blur(7px);}
+  70%{opacity:1; filter:blur(2px);}
+  100%{opacity:1; transform:translateY(0) scale(1); filter:blur(0);}
+}
+
+/* shimmer sweep */
+.fx-title .fx-shimmer{
+  position:absolute;
+  inset:-10px;
+  z-index:3;
+  pointer-events:none;
+  opacity:0;
+  background:
+    linear-gradient(110deg,
+      transparent 0%,
+      rgba(255,255,255,.0) 35%,
+      rgba(255,255,255,.55) 50%,
+      rgba(255,255,255,.0) 65%,
+      transparent 100%);
+  transform: translateX(-120%) skewX(-12deg);
+  mix-blend-mode: screen;
+  filter: blur(.3px);
+}
+
+.fx-title.play .fx-stroke{opacity:1; animation: strokeFade 1200ms ease forwards;}
+@keyframes strokeFade{ 0%{opacity:0} 25%{opacity:1} 100%{opacity:.88} }
+
+.fx-title.play .fx-stroke text{
+  animation: drawStroke 1650ms cubic-bezier(.10,.85,.15,1) forwards;
+}
+@keyframes drawStroke{
+  to{ stroke-dashoffset: 0; }
+}
+
+.fx-title.play .fx-shimmer{
+  opacity:.9;
+  animation: shimmerSweep 1250ms cubic-bezier(.2,.8,.2,1) 520ms forwards;
+}
+@keyframes shimmerSweep{
+  0%{transform: translateX(-120%) skewX(-12deg); opacity:0}
+  20%{opacity:.9}
+  100%{transform: translateX(130%) skewX(-12deg); opacity:0}
+}
+
+/* mobile: cho phép xuống dòng đẹp */
+@media(max-width:520px){
+  .fx-title .fx-fill{ white-space:normal; font-size:36px; line-height:1.2;}
+}
+
+/* giảm motion */
+@media (prefers-reduced-motion: reduce){
+  .fx-title .fx-stroke text{animation:none !important; stroke-dashoffset:0 !important;}
+  .fx-title .fx-fill span{animation:none !important; opacity:1 !important; transform:none !important; filter:none !important;}
+  .fx-title .fx-shimmer{display:none !important;}
+}
   </style>
 </head>
 
 <body>
+  <!-- sparkles background -->
+  <canvas id="sparkles"></canvas>
+
+  <!-- Petal FX stage (VIP) -->
+  <div id="petalStage" aria-hidden="true">
+    <div class="petal-layer" id="petalFar"  style="--mx:.18; --my:.12;"></div>
+    <div class="petal-layer" id="petalMid"  style="--mx:.36; --my:.24;"></div>
+    <div class="petal-layer" id="petalNear" style="--mx:.55; --my:.36;"></div>
+  </div>
+
   <!-- Music -->
   <button class="music-btn" id="musicBtn" title="Bật/Tắt nhạc" aria-label="Bật/Tắt nhạc" data-playing="false">
     <svg class="music-on" viewBox="0 0 24 24" fill="none">
@@ -587,46 +1029,46 @@
   <audio id="bgm" preload="auto" loop></audio>
 
   <!-- Splash -->
-  <div id="splash" style="
-    position:fixed; inset:0; z-index:999;
-    display:flex; align-items:center; justify-content:center;
-    background: radial-gradient(800px 500px at 20% 20%, rgba(255,255,255,.22), transparent 60%),
-                radial-gradient(800px 500px at 80% 30%, rgba(255,255,255,.18), transparent 60%),
-                linear-gradient(180deg,var(--wine),var(--wine2));
-  ">
-    <div id="splashInner" style="
-      width:min(560px, 92vw);
-      padding:22px 18px;
-      border-radius:22px;
-      background: rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.18);
-      backdrop-filter: blur(12px);
-      color:#fff;
-      text-align:center;
-      box-shadow: 0 20px 70px rgba(0,0,0,.35);
-    ">
-      <div style="font-family:'Playfair Display',serif; letter-spacing:.12em; text-transform:uppercase; opacity:.9;">Xin chào</div>
-      <div style="font-family:'Great Vibes',cursive; font-size:52px; margin-top:6px;">Trung Hiếu ❤️ Nguyễn Thuận</div>
-      <div style="opacity:.88; margin-top:6px;">Chạm vào trái tim để mở thiệp mời ✨</div>
+  <div id="splash">
+  <div id="splashInner">
 
-      <button id="heartBtn" style="
-        width:132px;height:132px;margin:18px auto 10px;border-radius:999px;
-        border:1px solid rgba(255,255,255,.26);
-        background: linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.08));
-        box-shadow: 0 22px 70px rgba(0,0,0,.25);
-        display:grid;place-items:center;cursor:pointer;
-      ">
-        <span id="heartIcon" style="font-size:58px; filter: drop-shadow(0 14px 22px rgba(0,0,0,.25));">❤️</span>
+    <div class="splash-border">
+
+      <div class="splash-top">WEDDING INVITATION</div>
+
+      <div class="fx-title" id="fxTitle" data-text="Trần Hiếu & Quỳnh Thuận" aria-label="Trần Hiếu & Quỳnh Thuận">
+  <!-- SVG stroke (vẽ nét) -->
+  <svg class="fx-stroke" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <text x="50%" y="62%" text-anchor="middle" dominant-baseline="middle">Trần Hiếu & Quỳnh Thuận</text>
+  </svg>
+
+  <!-- Fill chữ (từng ký tự) -->
+  <div class="fx-fill" aria-hidden="true"></div>
+
+  <!-- shimmer -->
+  <div class="fx-shimmer" aria-hidden="true"></div>
+</div>
+
+      <div class="splash-sub">
+        Trân trọng kính mời bạn tham dự lễ cưới của chúng mình
+      </div>
+
+      <button id="heartBtn">
+        <span id="heartIcon">❤️</span>
       </button>
 
-      <div style="opacity:.85; font-family:'Playfair Display',serif;">Hẹn gặp bạn trong ngày vui của chúng mình</div>
+      <div style="font-family:'Playfair Display',serif; font-size:13px; opacity:.7;">
+        Click để mở thiệp ✨
+      </div>
+
     </div>
+
+  </div>
+</div>
   </div>
 
-  <div class="burst" id="burst"></div>
-
   <!-- MAIN -->
-  <div class="page" id="main" style="display:none">
+  <div class="page" id="main">
 
     <!-- COVER -->
     <section class="cover">
@@ -636,13 +1078,10 @@
           <!-- I LOVE YOU arc (SVG path) -->
           <svg class="love-arc" viewBox="0 0 240 240" aria-hidden="true">
             <defs>
-              <!-- vòng cung chuẩn -->
-              <path id="arcPath" d="M 35 175 A 95 95 0 0 1 175 35" />
+              <path id="arcPath" d="M 28 190 A 110 110 0 0 1 190 28" />
             </defs>
             <text>
-              <textPath href="#arcPath" startOffset="2%">
-                I&nbsp;LOVE&nbsp;YOU
-              </textPath>
+              <textPath href="#arcPath" startOffset="2%">I&nbsp;LOVE&nbsp;YOU</textPath>
             </text>
           </svg>
 
@@ -658,7 +1097,7 @@
           </svg>
 
           <div class="hero-arc">
-            <img class="hero-photo" src="img/hero.jpg" alt="Ảnh cưới chính">
+            <img class="hero-photo" src="img/hero.jpg" alt="Ảnh cưới chính (hero)">
           </div>
         </div>
 
@@ -667,14 +1106,14 @@
           <div class="info-line"></div>
           <div class="info-row">
             <div>THỨ BẢY • 16:30</div>
-            <div class="info-date">05 . 12 . 2025</div>
+            <div class="info-date">21 . 03 . 2026</div>
           </div>
           <div class="info-line"></div>
           <div class="info-title">LỄ THÀNH HÔN</div>
           <div class="info-line"></div>
           <div class="info-row">
-            <div>CHỦ NHẬT • 12:00</div>
-            <div class="info-date">06 . 12 . 2025</div>
+            <div>CHỦ NHẬT • 10:00</div>
+            <div class="info-date">22 . 03 . 2026</div>
           </div>
         </div>
 
@@ -687,14 +1126,14 @@
       <div class="families">
         <div class="fam">
           <h3>Nhà Trai</h3>
-          <p>Ông: Tống Đình Quý<br/>Bà: Vũ Thị Hoài Vân<br/>10 Lê Lợi • Đề Thám • TP.Thái Bình</p>
-          <div class="names-script">Trung Hiếu</div>
+          <p>Ông: Trần Văn Thảo<br/>Bà: Nguyễn Thị Thu<br/>Lam Sơn • Phú Thọ</p>
+          <div class="names-script">Trần Hiếu</div>
         </div>
 
         <div class="fam">
           <h3>Nhà Gái</h3>
-          <p>Ông: Nguyễn Đình Quý<br/>Bà: Vũ Thị Hoài Vân<br/>Vĩnh An Nam • Tam Xuân • Đà Nẵng</p>
-          <div class="names-script">Nguyễn Thuận</div>
+          <p>Ông: Nguyễn Văn Xoa<br/>Bà: Nguyễn Thị Vân<br/>Vĩnh Hưng • Phú Thọ</p>
+          <div class="names-script">Quỳnh Thuận</div>
         </div>
       </div>
 
@@ -707,30 +1146,53 @@
         <p class="invite-script">Thư Mời</p>
         <p class="invite-sub">THAM DỰ LỄ THÀNH HÔN CỦA CHÚNG MÌNH</p>
       </div>
+      <!-- VIP moments (ảnh + lời nhắn) -->
+      <div class="moments">
+        <div class="moment">
+          <div class="m-photo"><img src="img/p1.jpg" alt="Khoảnh khắc 1"></div>
+          <div class="m-text">
+            <h3 class="m-title">Khoảnh khắc 01</h3>
+            <p class="m-quote">“Gặp đúng người, đúng thời điểm — mọi điều bỗng trở nên dịu dàng.”</p>
+            <div class="m-sign">With Love</div>
+          </div>
+        </div>
 
-      <div class="triple-photos">
-        <div class="phbox"><img src="img/p1.jpg" alt="Photo 1"></div>
-        <div class="phbox"><img src="img/p2.jpg" alt="Photo 2"></div>
-        <div class="phbox"><img src="img/p3.jpg" alt="Photo 3"></div>
+        <div class="moment reverse">
+          <div class="m-photo"><img src="img/p2.jpg" alt="Khoảnh khắc 2"></div>
+          <div class="m-text">
+            <h3 class="m-title">Khoảnh khắc 02</h3>
+            <p class="m-quote">“Tình yêu không cần hoàn hảo — chỉ cần chân thành và luôn ở cạnh nhau.”</p>
+            <div class="m-sign">Always</div>
+          </div>
+        </div>
+
+        <div class="moment">
+          <div class="m-photo"><img src="img/p3.jpg" alt="Khoảnh khắc 3"></div>
+          <div class="m-text">
+            <h3 class="m-title">Khoảnh khắc 03</h3>
+            <p class="m-quote">“Hôm nay là lời hứa, ngày mai là hành trình — cùng nhau đi đến tận cùng.”</p>
+            <div class="m-sign">Forever</div>
+          </div>
+        </div>
       </div>
 
       <div class="main-time">
         <div class="line1">Vào lúc</div>
         <div class="line2">
-          <span class="big-num" id="cerTime">12:00</span>
+          <span class="big-num" id="cerTime">10:00</span>
           <span class="sep">|</span>
-          <span class="big-num" id="cerDate">06.12.2025</span>
+          <span class="big-num" id="cerDate">22.03.2026</span>
           <span class="sep">|</span>
           <span class="big-num" style="font-size:28px;color:var(--ink)" id="cerDay">Chủ Nhật</span>
         </div>
-        <div class="lunar" id="lunarText">Tức ngày 16 tháng 10 năm Ất Tỵ</div>
+        <div class="lunar" id="lunarText">Tức ngày 04 tháng 03 năm Bính Ngọ</div>
       </div>
 
       <div class="place-block">
         <div class="place-title">Tại</div>
         <div class="place-name" id="mainPlace">Tư Gia Nhà Trai</div>
-        <div class="place-addr" id="mainAddr">10 Lê Lợi • Đề Thám • TP.Thái Bình</div>
-        <div style="margin-top:12px;">
+        <div class="place-addr" id="mainAddr">Nhà Ông Bà Thu Thảo • Lam Sơn • Phú Thọ</div>
+        <div style="margin-top:10px;">
           <a class="btn" id="btnMapMain" target="_blank" rel="noreferrer">Chỉ đường</a>
         </div>
       </div>
@@ -738,8 +1200,11 @@
       <div class="party-grid">
         <div class="party">
           <div class="pill-title">Tiệc Mời Cưới Nhà Trai</div>
-          <div class="p-row"><div><b id="gPartyTime">16:30</b> <span>• Thứ bảy</span></div><div><b id="gPartyDate">05.12.2025</b></div></div>
-          <div class="p-sub" id="gPartyLunar">11/11 âm lịch</div>
+          <div class="p-row">
+            <div><b id="gPartyTime">16:30</b> <span>• Thứ bảy</span></div>
+            <div><b id="gPartyDate">21.03.2026</b></div>
+          </div>
+          <div class="p-sub" id="gPartyLunar">03/02 âm lịch</div>
           <div class="p-sub">Tại tư gia Nhà Trai</div>
           <div style="margin-top:10px;">
             <a class="btn" id="btnMapGroom" target="_blank" rel="noreferrer">Chỉ đường</a>
@@ -748,9 +1213,12 @@
 
         <div class="party">
           <div class="pill-title">Tiệc Mời Cưới Nhà Gái</div>
-          <div class="p-row"><div><b id="bPartyTime">18:00</b> <span>• Thứ bảy</span></div><div><b id="bPartyDate">05.12.2025</b></div></div>
-          <div class="p-sub" id="bPartyLunar">11/11 âm lịch</div>
-          <div class="p-sub" id="bPartyPlace">Khách sạn Cinelove</div>
+          <div class="p-row">
+            <div><b id="bPartyTime">16:30</b> <span>• Thứ bảy</span></div>
+            <div><b id="bPartyDate">21.03.2026</b></div>
+          </div>
+          <div class="p-sub" id="bPartyLunar">03/02 âm lịch</div>
+          <div class="p-sub" id="bPartyPlace">Tại tư gia Nhà Gái</div>
           <div style="margin-top:10px;">
             <a class="btn" id="btnMapBride" target="_blank" rel="noreferrer">Chỉ đường</a>
           </div>
@@ -761,7 +1229,7 @@
     <!-- CALENDAR -->
     <section class="section">
       <div class="cal">
-        <div class="cal-head">Tháng 12</div>
+        <div class="cal-head" id="calTitle">Tháng 03</div>
         <div class="cal-body">
           <div class="cal-grid" id="calendarGrid"></div>
         </div>
@@ -791,45 +1259,44 @@
 
   </div>
 
-  <div class="toast" id="toast">Đã copy!</div>
+  <div class="toast" id="toast">OK</div>
 
   <script>
     // =========================
-    // CONFIG (SỬA Ở ĐÂY)
+    // VIP CONFIG (SỬA Ở ĐÂY)
     // =========================
     const CEREMONY = {
-      time: "12:00",
-      dateText: "06.12.2025",
+      time: "10:00",
+      dateText: "22.03.2026",
       dayText: "Chủ Nhật",
-      lunar: "Tức ngày 16 tháng 10 năm Ất Tỵ",
+      lunar: "Tức ngày 03 tháng 02 năm Bính Ngọ",
       place: "Tư Gia Nhà Trai",
-      address: "10 Lê Lợi • Đề Thám • TP.Thái Bình",
-      map: "https://maps.google.com/?q=10%20L%C3%AA%20L%E1%BB%A3i%20Th%C3%A1i%20B%C3%ACnh"
+      address: "Ông Bà Thu Thảo • Lam Sơn • Phú Thọ",
+      map: "https://maps.app.goo.gl/di68zQQc96xPovwY6"
     };
     const GROOM_PARTY = {
       time: "16:30",
-      dateText: "05.12.2025",
-      lunar: "11/11 âm lịch",
-      map: "https://maps.google.com/?q=10%20L%C3%AA%20L%E1%BB%A3i%20Th%C3%A1i%20B%C3%ACnh"
+      dateText: "21.03.2026",
+      lunar: "03/02 âm lịch",
+      map: "https://maps.app.goo.gl/di68zQQc96xPovwY6"
     };
     const BRIDE_PARTY = {
-      time: "18:00",
-      dateText: "05.12.2025",
-      lunar: "11/11 âm lịch",
-      place: "Khách sạn Cinelove",
-      map: "https://maps.google.com/?q=kh%C3%A1ch%20s%E1%BA%A1n%20Cinelove"
+      time: "16:30",
+      dateText: "21.03.2026",
+      lunar: "03/02 âm lịch",
+      place: "Tư Gia Nhà Gái",
+      map: "https://maps.app.goo.gl/YhhPtKRZmQWeUy7s9"
     };
 
     // Nhạc nền: upload mp3 vào repo: audio/song.mp3
     const MUSIC_SRC = "audio/song.mp3";
     const MUSIC_DEFAULT_ON = true;
 
-    // Calendar highlight (tháng 12/2025): tim ở 5, dấu tay ở 6
-    const CALENDAR = { year: 2025, monthIndex: 11, heartDay: 5, markDay: 6 };
+    // Calendar (set đúng tháng/năm bạn muốn)
+    const CALENDAR = { year: 2026, monthIndex: 2, heartDay: 22, markDay: 21 }; // monthIndex: 0=Jan
+    // =========================
 
-    // =========================
     // Fill texts
-    // =========================
     document.getElementById("cerTime").textContent = CEREMONY.time;
     document.getElementById("cerDate").textContent = CEREMONY.dateText;
     document.getElementById("cerDay").textContent = CEREMONY.dayText;
@@ -850,15 +1317,8 @@
     document.getElementById("btnMapBride").href = BRIDE_PARTY.map;
 
     // =========================
-    // Splash open -> main (burst)
+    // MUSIC
     // =========================
-    const splash = document.getElementById("splash");
-    const splashInner = document.getElementById("splashInner");
-    const main = document.getElementById("main");
-    const burst = document.getElementById("burst");
-    const heartBtn = document.getElementById("heartBtn");
-
-    // Music
     const bgm = document.getElementById("bgm");
     const musicBtn = document.getElementById("musicBtn");
     bgm.src = MUSIC_SRC;
@@ -866,62 +1326,286 @@
     function setMusicUI(isPlaying){ musicBtn.dataset.playing = isPlaying ? "true" : "false"; }
     async function playMusic(){
       try{ await bgm.play(); setMusicUI(true); }
-      catch{ setMusicUI(false); }
+      catch{ setMusicUI(false); showToast("Chạm 🎵 để bật nhạc"); }
     }
     function pauseMusic(){ bgm.pause(); setMusicUI(false); }
     musicBtn.addEventListener("click", async () => {
       if (bgm.paused) await playMusic(); else pauseMusic();
     });
 
-    heartBtn.addEventListener("click", async () => {
-      const rect = heartBtn.getBoundingClientRect();
-      const cx = rect.left + rect.width/2;
-      const cy = rect.top + rect.height/2;
+    // =========================
+    // VIP PETAL FX
+    // =========================
+    const petalStage = document.getElementById("petalStage");
+    const petalFar  = document.getElementById("petalFar");
+    const petalMid  = document.getElementById("petalMid");
+    const petalNear = document.getElementById("petalNear");
 
-      const emojis = ["❤️","💖","✨","🌸","💐","💍"];
-      const count = 52;
+    // petal SVG (light pink) as data-uri
+    function petalSvg(fill, stroke, alpha){
+      const svg =
+`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <path d="M32 6c8 10 16 18 20 28 4 11-2 22-14 24-10 2-20-2-24-12C8 34 18 18 32 6z"
+        fill="${fill}" fill-opacity="${alpha}" stroke="${stroke}" stroke-opacity="${alpha}" stroke-width="1.2"/>
+  <path d="M28 18c3 10 6 18 10 26" stroke="${stroke}" stroke-opacity="${alpha}" stroke-width="1" stroke-linecap="round"/>
+</svg>`;
+      return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+    }
+    const PETAL_SKINS = [
+      petalSvg("#f7b7c8", "#e98aa6", 0.95),
+      petalSvg("#ffd1dc", "#f2a9bf", 0.92),
+      petalSvg("#ffc0d4", "#ea88aa", 0.90),
+      petalSvg("#ffe0ea", "#f1a9c1", 0.92)
+    ];
 
+    function rand(min,max){ return min + Math.random()*(max-min); }
+
+    function makePetal(layer, cls){
+      const el = document.createElement("div");
+      el.className = "petal " + cls;
+      el.style.backgroundImage = `url("${PETAL_SKINS[(Math.random()*PETAL_SKINS.length)|0]}")`;
+      layer.appendChild(el);
+      return el;
+    }
+
+    // Burst from heart
+    function burstPetals(cx, cy){
+      petalStage.classList.add("show");
+
+      const count = 160; // VIP: bung rất nhiều
       for(let i=0;i<count;i++){
-        const p = document.createElement("div");
-        p.className = "particle";
-        p.textContent = emojis[(Math.random()*emojis.length)|0];
+        const layer = (i%3===0) ? petalNear : (i%3===1 ? petalMid : petalFar);
+        const p = makePetal(layer, "burst");
 
-        const angle = (Math.PI*2)*(i/count) + (Math.random()*0.5);
-        const radius = 220 + Math.random()*260;
+        const angle  = Math.random() * Math.PI * 2;
+        const radius = rand(240, 540);
+        const swirl  = rand(-120, 120); // xoáy nhẹ
 
-        const x0 = cx + (Math.random()*12-6);
-        const y0 = cy + (Math.random()*12-6);
-        const x1 = cx + Math.cos(angle)*radius;
-        const y1 = cy + Math.sin(angle)*radius;
+        const x0 = cx + rand(-14, 14);
+        const y0 = cy + rand(-14, 14);
+        const x1 = cx + Math.cos(angle) * radius + swirl;
+        const y1 = cy + Math.sin(angle) * radius + rand(-30, 70);
 
-        p.style.left = "0px";
-        p.style.top = "0px";
+        const size = rand(16, 30) * (layer===petalNear ? 1.15 : layer===petalMid ? 1.0 : 0.88);
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+
         p.style.setProperty("--x0", `${x0}px`);
         p.style.setProperty("--y0", `${y0}px`);
         p.style.setProperty("--x1", `${x1}px`);
         p.style.setProperty("--y1", `${y1}px`);
-        p.style.fontSize = (14 + Math.random()*16) + "px";
-        p.style.animationDelay = (Math.random()*60) + "ms";
+        p.style.setProperty("--r0", `${rand(-90, 90)}deg`);
+        p.style.setProperty("--r1", `${rand(360, 900)}deg`);
+        p.style.animationDelay = `${rand(0, 160)}ms`;
 
-        burst.appendChild(p);
         p.addEventListener("animationend", ()=>p.remove());
       }
+    }
 
-      splashInner.style.transition = "all .52s ease";
-      splashInner.style.opacity = "0";
-      splashInner.style.transform = "translateY(10px) scale(.98)";
+    // Rain
+    let rainOn = false;
+    function spawnRainPetal(layer, depthZ, intensity){
+      const p = makePetal(layer, "rain");
 
-      setTimeout(()=>{
-        splash.style.display="none";
-        main.style.display="block";
-        musicBtn.classList.add("show");
-      }, 520);
+      const x = rand(-10, 110); // vw range
+      const z = depthZ; // px
+      const dur = intensity ? rand(3.0, 6.2) : rand(6.0, 10.8);
+      const sizeBase = intensity ? rand(16, 30) : rand(14, 24);
+      const size = sizeBase * (layer===petalNear ? 1.18 : layer===petalMid ? 1.0 : 0.86);
 
-      if (MUSIC_DEFAULT_ON) await playMusic();
+      p.style.left = x + "vw";
+      p.style.width = size + "px";
+      p.style.height = size + "px";
+      p.style.animationDuration = dur + "s";
+
+      p.style.setProperty("--x", x + "vw");
+      p.style.setProperty("--z", z + "px");
+      p.style.setProperty("--drift", (rand(-110, 110)) + "px");
+      p.style.setProperty("--rx", rand(-35, 35) + "deg");
+      p.style.setProperty("--ry", rand(-35, 35) + "deg");
+      p.style.setProperty("--rz", rand(0, 360) + "deg");
+      p.style.setProperty("--sc", (intensity ? rand(0.8, 1.35) : rand(0.7, 1.15)));
+
+      const ttl = (dur*1000) + 250;
+      setTimeout(()=>p.remove(), ttl);
+    }
+
+    // VIP rain controller: intense for a while after opening, then gentle continuous
+    let rainTimer = null;
+    function startRain(intenseMs = 7000){
+      if (rainOn) return;
+      rainOn = true;
+      petalStage.classList.add("show");
+
+      const t0 = Date.now();
+      rainTimer = setInterval(() => {
+        const intense = (Date.now() - t0) < intenseMs;
+
+        // spawn more when intense
+        const batch = intense ? 6 : 2;
+
+        for(let i=0;i<batch;i++){
+          spawnRainPetal(petalFar,  -260 - rand(0, 140), intense);
+          spawnRainPetal(petalMid,  -150 - rand(0, 110), intense);
+          spawnRainPetal(petalNear,  -70 - rand(0, 70), intense);
+        }
+      }, 110); // density
+
+      // After intenseMs, keep it gentle but continuous (do nothing; batch reduces)
+    }
+
+    function stopRain(){
+      if (!rainOn) return;
+      rainOn = false;
+      clearInterval(rainTimer);
+      rainTimer = null;
+      // fade stage later (keep a bit)
+      setTimeout(()=>petalStage.classList.remove("show"), 1200);
+    }
+
+    // Parallax
+    function setParallax(dx, dy){
+      const px = Math.max(-16, Math.min(16, dx)) + "px";
+      const py = Math.max(-16, Math.min(16, dy)) + "px";
+      document.documentElement.style.setProperty("--px", px);
+      document.documentElement.style.setProperty("--py", py);
+    }
+    window.addEventListener("mousemove", (e) => {
+      const cx = innerWidth/2, cy = innerHeight/2;
+      const dx = (e.clientX - cx) / cx * 14;
+      const dy = (e.clientY - cy) / cy * 14;
+      setParallax(dx, dy);
     });
+    window.addEventListener("deviceorientation", (e) => {
+      if (e.beta == null || e.gamma == null) return;
+      const dx = (e.gamma / 45) * 12;
+      const dy = (e.beta  / 45) * 12;
+      setParallax(dx, dy);
+    }, true);
 
     // =========================
-    // Calendar render (spacing như mẫu)
+    // Splash -> Main (VIP smooth)
+    // =========================
+    const splash = document.getElementById("splash");
+    const splashInner = document.getElementById("splashInner");
+    const main = document.getElementById("main");
+    const heartBtn = document.getElementById("heartBtn");
+    const heartIcon = document.getElementById("heartIcon");
+    let opened = false;
+
+    /* ================= TYPEWRITER ================= */
+function typeWriter(el, text, speed=50){
+  el.innerHTML="";
+  [...text].forEach((c,i)=>{
+    const span=document.createElement("span");
+    span.textContent=c;
+    el.appendChild(span);
+
+    setTimeout(()=>span.classList.add("show"), i*speed);
+  });
+}
+
+/* ================= CAMERA SHAKE ================= */
+function cameraShake(){
+  document.body.classList.add("shake");
+  setTimeout(()=>document.body.classList.remove("shake"),400);
+}
+
+/* ================= MUSIC FADE ================= */
+async function playMusicSmooth(){
+  try{
+    await bgm.play();
+    setMusicUI(true);
+    bgm.volume=0;
+
+    let v=0;
+    const fade=setInterval(()=>{
+      v+=0.04;
+      if(v>=1){
+        bgm.volume=1;
+        clearInterval(fade);
+      }else{
+        bgm.volume=v;
+      }
+    },80);
+  }catch{setMusicUI(false);}
+}
+
+/* ================= PARALLAX 3D ================= */
+window.addEventListener("mousemove",(e)=>{
+  const cx=innerWidth/2;
+  const cy=innerHeight/2;
+
+  const dx=(e.clientX-cx)/cx*18;
+  const dy=(e.clientY-cy)/cy*18;
+
+  document.documentElement.style.setProperty("--px", dx+"px");
+  document.documentElement.style.setProperty("--py", dy+"px");
+});
+
+/* ================= NEW OPEN EVENT ================= */
+heartBtn.addEventListener("click", async () => {
+  if (opened) return;
+  opened = true;
+playFxTitle(document.getElementById("fxTitle"));
+  document.body.classList.add("opening");
+
+  // heart animation mạnh
+  heartIcon.animate([
+    { transform: "scale(1)" },
+    { transform: "scale(2)" },
+    { transform: "scale(0.9)" },
+    { transform: "scale(1.3)" }
+  ], { duration: 800 });
+
+  // shake
+  cameraShake();
+
+  // petal burst
+  const rect = heartBtn.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top + rect.height/2;
+
+  burstPetals(cx, cy);
+  startRain(10000);
+
+  // slow motion effect
+  splashInner.style.transition = "all 1.4s cubic-bezier(.22,.61,.36,1)";
+  splash.style.transition = "all 1.4s cubic-bezier(.22,.61,.36,1)";
+
+  setTimeout(()=>{
+    splashInner.classList.add("out");
+  },400);
+
+  setTimeout(()=>{
+    splash.classList.add("fade");
+  },700);
+
+  setTimeout(()=>{
+    splash.style.display = "none";
+    main.style.display = "block";
+
+    requestAnimationFrame(()=>{
+      main.classList.add("show");
+    });
+
+    musicBtn.classList.add("show");
+
+    // typewriter
+    const t = document.getElementById("typingText");
+    if(t) typeWriter(t, t.textContent, 60);
+
+  },1600);
+
+  // music smooth
+  if (MUSIC_DEFAULT_ON) {
+  await playMusicSmooth();
+  setMusicUI(!bgm.paused);
+}
+});
+
+    // =========================
+    // Calendar render
     // =========================
     function renderCalendar(){
       const grid = document.getElementById("calendarGrid");
@@ -930,14 +1614,15 @@
       const y = CALENDAR.year;
       const m = CALENDAR.monthIndex;
 
+      const monthNames = ["Tháng 01","Tháng 02","Tháng 03","Tháng 04","Tháng 05","Tháng 06","Tháng 07","Tháng 08","Tháng 09","Tháng 10","Tháng 11","Tháng 12"];
+      document.getElementById("calTitle").textContent = monthNames[m];
+
       const first = new Date(y, m, 1);
       const last = new Date(y, m+1, 0);
       const daysInMonth = last.getDate();
 
-      // 0=Sun..6=Sat
-      const start = first.getDay();
+      const start = first.getDay(); // 0=Sun..6=Sat
 
-      // ô trống đầu tháng (ẩn)
       for(let i=0;i<start;i++){
         const d = document.createElement("div");
         d.className = "day muted";
@@ -966,6 +1651,159 @@
       }
     }
     renderCalendar();
+
+    // =========================
+    // Toast helper
+    // =========================
+    function showToast(text){
+      const t = document.getElementById("toast");
+      t.textContent = text;
+      t.style.display = "block";
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>t.style.display="none", 1900);
+    }
+
+    // =========================
+    // Sparkles (canvas) - nhẹ + premium
+    // =========================
+    const canvas = document.getElementById("sparkles");
+    const ctx = canvas.getContext("2d");
+    let W=0,H=0,DPR=1;
+
+    function resize(){
+      DPR = Math.max(1, Math.min(2, devicePixelRatio || 1));
+      W = canvas.width  = Math.floor(innerWidth * DPR);
+      H = canvas.height = Math.floor(innerHeight * DPR);
+      canvas.style.width = innerWidth + "px";
+      canvas.style.height = innerHeight + "px";
+    }
+    addEventListener("resize", resize);
+    resize();
+
+    const stars = [];
+    const STAR_COUNT = 85;
+
+    for(let i=0;i<STAR_COUNT;i++){
+      stars.push({
+        x: Math.random()*W, y: Math.random()*H,
+        r: (0.6 + Math.random()*1.8)*DPR,
+        a: 0.18 + Math.random()*0.7,
+        tw: 0.006 + Math.random()*0.014,
+        vx: (-0.015 + Math.random()*0.03)*DPR,
+        vy: (0.008 + Math.random()*0.05)*DPR
+      });
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+
+      // soft warm glow
+      const g1 = ctx.createRadialGradient(W*0.20,H*0.18,0, W*0.20,H*0.18, W*0.70);
+      g1.addColorStop(0,"rgba(255,184,206,0.12)");
+      g1.addColorStop(1,"rgba(0,0,0,0)");
+      ctx.fillStyle = g1;
+      ctx.fillRect(0,0,W,H);
+
+      for(const s of stars){
+        s.a += s.tw * (Math.random()>0.5?1:-1);
+        s.a = Math.max(0.12, Math.min(0.85, s.a));
+
+        s.x += s.vx; s.y += s.vy;
+        if(s.y > H+30){ s.y = -30; s.x = Math.random()*W; }
+        if(s.x < -30) s.x = W+30;
+        if(s.x > W+30) s.x = -30;
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fill();
+
+        if (s.a > 0.70){
+          ctx.strokeStyle = `rgba(255,214,170,${s.a*0.42})`;
+          ctx.lineWidth = 1*DPR;
+          ctx.beginPath();
+          ctx.moveTo(s.x - 6*DPR, s.y);
+          ctx.lineTo(s.x + 6*DPR, s.y);
+          ctx.moveTo(s.x, s.y - 6*DPR);
+          ctx.lineTo(s.x, s.y + 6*DPR);
+          ctx.stroke();
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+    // ===== Premium Title FX (stroke + per-char + shimmer) =====
+function setFxTitleText(el, text){
+  el.dataset.text = text;
+
+  // set SVG text
+  const svgText = el.querySelector("svg.fx-stroke text");
+  if (svgText) svgText.textContent = text;
+
+  // build per-char spans
+  const fill = el.querySelector(".fx-fill");
+  fill.innerHTML = "";
+  const chars = Array.from(text);
+  chars.forEach((ch, i) => {
+    const sp = document.createElement("span");
+    sp.innerHTML = (ch === " ") ? "&nbsp;" : ch;
+    // delay kiểu cinematic (nhanh vừa, không “robot”)
+    sp.style.animationDelay = (i * 38) + "ms";
+    fill.appendChild(sp);
+  });
+}
+
+// auto-fit cho SVG stroke (để không bị cắt / xuống dòng xấu)
+function fitSvgText(el){
+  const svg = el.querySelector("svg.fx-stroke");
+  const t = svg?.querySelector("text");
+  if (!svg || !t) return;
+
+  // thử giảm dần font-size cho vừa khung
+  let size = 160;   // starting
+  t.setAttribute("font-size", size);
+
+  // hack: đo bằng getBBox (SVG)
+  for(let k=0;k<40;k++){
+    const box = t.getBBox();
+    const maxW = 1100; // viewBox width minus padding
+    if (box.width <= maxW) break;
+    size -= 3;
+    t.setAttribute("font-size", size);
+  }
+}
+
+// play animation (replay được)
+function playFxTitle(el){
+  el.classList.remove("play");
+  // reset spans animation
+  const spans = el.querySelectorAll(".fx-fill span");
+  spans.forEach(sp=>{
+    sp.style.animation = "none";
+    sp.offsetHeight; // reflow
+    sp.style.animation = "";
+  });
+
+  // reset stroke
+  const t = el.querySelector("svg.fx-stroke text");
+  if (t){
+    t.style.animation = "none";
+    t.offsetHeight;
+    t.style.animation = "";
+  }
+
+  requestAnimationFrame(()=> el.classList.add("play"));
+}
+
+// init title
+const fxTitleEl = document.getElementById("fxTitle");
+setFxTitleText(fxTitleEl, fxTitleEl.dataset.text || "Trần Hiếu & Quỳnh Thuận");
+fitSvgText(fxTitleEl);
+playFxTitle(fxTitleEl);
+
+// nếu bạn muốn chạy lại khi mở thiệp (cực đã):
+// gọi playFxTitle(fxTitleEl) trong sự kiện heartBtn click trước khi fade splash
   </script>
 </body>
 </html>
