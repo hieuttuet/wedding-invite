@@ -1809,7 +1809,7 @@ function playFxTitle(el){
   // reset stroke
   const t = el.querySelector("svg.fx-stroke text");
   if (t){
-    t.style.animation = "none";
+    t.style.animation = "none"; 
     t.offsetHeight;
     t.style.animation = "";
   }
@@ -1817,14 +1817,19 @@ function playFxTitle(el){
   requestAnimationFrame(()=> el.classList.add("play"));
 }
 
-// init title
+// init title (FIX iOS: đợi font load)
 const fxTitleEl = document.getElementById("fxTitle");
 setFxTitleText(fxTitleEl, fxTitleEl.dataset.text || "Trần Hiếu & Quỳnh Thuận");
-fitSvgText(fxTitleEl);
-playFxTitle(fxTitleEl);
 
-// nếu bạn muốn chạy lại khi mở thiệp (cực đã):
-// gọi playFxTitle(fxTitleEl) trong sự kiện heartBtn click trước khi fade splash
+(async () => {
+  try { await document.fonts.ready; } catch {}
+
+  // iOS/Safari đôi khi vẫn cần delay 1 nhịp
+  setTimeout(() => {
+    fitSvgText(fxTitleEl);
+    playFxTitle(fxTitleEl);
+  }, 80);
+})();
   </script>
 </body>
 </html>
