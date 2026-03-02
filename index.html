@@ -118,7 +118,13 @@
       border: 10px solid #fff;
       outline: 1px solid rgba(255,255,255,.45);
     }
-    @media(min-width:820px){ .hero-frame{min-height: 520px;} }
+    @media (max-width: 820px){
+  #sparkles{ opacity:.22; }
+  #splash.fade{ filter:none; }     /* bỏ blur 14px */
+  #main{ filter:none; }            /* bỏ blur 12px */
+  .hero-frame{ box-shadow: 0 14px 40px rgba(0,0,0,.14); } /* nhẹ hơn */
+  .petal{ filter:none; }           /* bỏ drop-shadow */
+}
 
     .hero-arc{
       position:absolute;
@@ -1433,26 +1439,26 @@ body.opening::before{
     // VIP rain controller: intense for a while after opening, then gentle continuous
     let rainTimer = null;
     function startRain(intenseMs = 7000){
-      if (rainOn) return;
-      rainOn = true;
-      petalStage.classList.add("show");
+  if (rainOn) return;
+  rainOn = true;
+  petalStage.classList.add("show");
 
-      const t0 = Date.now();
-      rainTimer = setInterval(() => {
-        const intense = (Date.now() - t0) < intenseMs;
+  const mobile = isMobile();
+  const t0 = Date.now();
 
-        // spawn more when intense
-        const batch = intense ? 6 : 2;
+  rainTimer = setInterval(() => {
+    const intense = (Date.now() - t0) < intenseMs;
 
-        for(let i=0;i<batch;i++){
-          spawnRainPetal(petalFar,  -260 - rand(0, 140), intense);
-          spawnRainPetal(petalMid,  -150 - rand(0, 110), intense);
-          spawnRainPetal(petalNear,  -70 - rand(0, 70), intense);
-        }
-      }, 110); // density
+    // ✅ giảm batch cực mạnh trên mobile
+    const batch = mobile ? (intense ? 1 : 1) : (intense ? 4 : 2);
 
-      // After intenseMs, keep it gentle but continuous (do nothing; batch reduces)
+    for(let i=0;i<batch;i++){
+      spawnRainPetal(petalFar,  -260 - rand(0, 140), intense);
+      spawnRainPetal(petalMid,  -150 - rand(0, 110), intense);
+      spawnRainPetal(petalNear,  -70  - rand(0, 70),  intense);
     }
+  }, mobile ? 260 : 140); // ✅ mobile chậm hơn
+}
 
     function stopRain(){
       if (!rainOn) return;
@@ -1567,7 +1573,8 @@ playFxTitle(document.getElementById("fxTitle"));
   const cy = rect.top + rect.height/2;
 
   burstPetals(cx, cy);
-  startRain(10000);
+  startRain(6000);
+setTimeout(stopRain, 14000); // ✅ tắt sau 14s
 
   // slow motion effect
   splashInner.style.transition = "all 1.4s cubic-bezier(.22,.61,.36,1)";
@@ -1670,18 +1677,23 @@ playFxTitle(document.getElementById("fxTitle"));
     const ctx = canvas.getContext("2d");
     let W=0,H=0,DPR=1;
 
-    function resize(){
-      DPR = Math.max(1, Math.min(2, devicePixelRatio || 1));
-      W = canvas.width  = Math.floor(innerWidth * DPR);
-      H = canvas.height = Math.floor(innerHeight * DPR);
-      canvas.style.width = innerWidth + "px";
-      canvas.style.height = innerHeight + "px";
-    }
+    function isMobile(){
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || innerWidth < 820;
+}
+
+function resize(){
+  const mobile = isMobile();
+  DPR = mobile ? 1 : Math.max(1, Math.min(2, devicePixelRatio || 1)); // ✅ mobile = 1
+  W = canvas.width  = Math.floor(innerWidth * DPR);
+  H = canvas.height = Math.floor(innerHeight * DPR);
+  canvas.style.width = innerWidth + "px";
+  canvas.style.height = innerHeight + "px";
+}
     addEventListener("resize", resize);
     resize();
 
     const stars = [];
-    const STAR_COUNT = 85;
+    const STAR_COUNT = isMobile() ? 35 : 85;
 
     for(let i=0;i<STAR_COUNT;i++){
       stars.push({
@@ -1693,8 +1705,17 @@ playFxTitle(document.getElementById("fxTitle"));
         vy: (0.008 + Math.random()*0.05)*DPR
       });
     }
+let last = 0;
+    function draw(ts){
+      const mobile = isMobile();
+  const fps = mobile ? 30 : 60;
+  const interval = 1000 / fps;
 
-    function draw(){
+  if (ts - last < interval){
+    requestAnimationFrame(draw);
+    return;
+  }
+  last = ts;
       ctx.clearRect(0,0,W,H);
 
       // soft warm glow
