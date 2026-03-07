@@ -19,13 +19,10 @@
       --ink:#1c0f14;
       --paper:#ffffff;
       --muted: rgba(28,15,20,.70);
-
       --line: rgba(110,20,20,.26);
       --line2: rgba(110,20,20,.18);
-
       --shadow: 0 18px 55px rgba(0,0,0,.12);
       --shadow2: 0 20px 70px rgba(0,0,0,.18);
-
       --r: 18px;
       --rBig: 26px;
 
@@ -322,7 +319,7 @@
       display:block;
       font-size: 16px;
       line-height: 14px;
-      color: rgba(196,20,42,.95);
+      color: rgba(110,20,20,.75);
     }
     @keyframes heartFloat{
       0%{ opacity:0; transform: translate3d(var(--x0), var(--y0), 0) scale(.85) rotate(var(--r0)); }
@@ -523,40 +520,134 @@
       filter: blur(.2px);
     }
 
-    /* =========================
-      MOMENTS + GALLERY
-    ========================= */
-    .moments{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:14px;
-      margin-top:14px;
-      padding: 0 18px 18px;
-    }
-    @media(min-width:768px){
-      .moments{ padding: 0 34px 26px; }
-    }
-    .moment{
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      overflow:hidden;
-      box-shadow: 0 12px 30px rgba(0,0,0,.08);
-      background:#fff;
-      display:grid;
-      grid-template-columns: 1fr;
-    }
-    @media(min-width:820px){
-      .moment{ grid-template-columns: 1.05fr .95fr; }
-      .moment.reverse{ grid-template-columns: .95fr 1.05fr; }
-      .moment.reverse .m-photo{ order:2; }
-      .moment.reverse .m-text{ order:1; }
-    }
-    .m-photo img{
-      width:100%;
-      height: 320px;
-      object-fit:cover;
-      display:block;
-    }
+/* =========================
+   MOMENTS SECTION
+========================= */
+.moments{
+  display:grid;
+  gap:16px;
+  margin-top:16px;
+  padding:0 18px 18px;
+}
+@media(min-width:768px){
+  .moments{ padding:0 34px 26px; }
+}
+.moment{
+  display:grid;
+  grid-template-columns:1fr;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+@media(min-width:820px){
+  .moment{ grid-template-columns:1.05fr .95fr; }
+
+  .moment.reverse{
+    grid-template-columns:.95fr 1.05fr;
+  }
+
+  .moment.reverse .m-photo{ order:2 }
+  .moment.reverse .m-text{ order:1 }
+}
+/* photo */
+.m-photo{
+  background:#f6f6f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px;
+}
+
+.m-photo img{
+  width:100%;
+  height:auto;
+  max-height:420px;
+  object-fit:contain;
+  border-radius:12px;
+}
+/* text */
+
+.m-text{
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:10px;
+}
+.m-title{
+  font-family:"Playfair Display", serif;
+  font-weight:800;
+  color:var(--wine);
+  font-size:18px;
+  margin:0;
+}
+
+.m-quote{
+  margin:0;
+  font-size:18px;
+  line-height:1.7;
+  color:rgba(28,15,20,.78);
+}
+
+.m-sign{
+  font-family:"Great Vibes", cursive;
+  color:rgba(110,20,20,.92);
+  font-size:34px;
+}
+
+/* =========================
+   MOMENT SCROLL REVEAL
+========================= */
+
+.moment .m-photo,
+.moment .m-text{
+  opacity:0;
+  transition:
+    opacity .9s cubic-bezier(.16,1,.3,1),
+    transform .9s cubic-bezier(.16,1,.3,1),
+    filter .9s cubic-bezier(.16,1,.3,1);
+}
+
+.moment .m-photo{
+  transform:translateX(-40px) scale(1.06);
+  filter:blur(10px);
+}
+
+.moment .m-text{
+  transform:translateX(40px);
+  filter:blur(8px);
+}
+
+.moment.show .m-photo{
+  opacity:1;
+  transform:translateX(0) scale(1);
+  filter:blur(0);
+}
+
+.moment.show .m-text{
+  opacity:1;
+  transform:translateX(0);
+  filter:blur(0);
+  transition-delay:.2s;
+}
+
+/* mobile nhẹ hơn */
+
+@media(max-width:520px){
+
+  .moment .m-photo{
+    transform:translateX(-18px);
+    filter:blur(6px);
+  }
+
+  .moment .m-text{
+    transform:translateX(18px);
+    filter:blur(6px);
+  }
+
+}
     .m-text{
       padding: 14px 14px 16px;
       display:flex;
@@ -759,33 +850,45 @@
       margin: 10px 0 12px;
     }
 
-    .splash-names{
-      width:min(560px, 92vw);
-      margin: 8px auto 0;
-      position:relative;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap: 12px;
-      overflow: visible;
-      padding: 6px 0 16px;
-    }
+    /* Container chứa 2 tên */
+.splash-names {
+  width: min(600px, 94vw); /* Tăng nhẹ chiều rộng */
+  margin: 16px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: visible !important; /* Đảm bảo nét chữ bay ra ngoài không bị ẩn */
+  z-index: 10;
+}
 
-    .name-line{
-      font-family:"Great Vibes", cursive;
-      font-size: clamp(38px, 5.6vw, 56px);
-      color: var(--wine);
-      line-height:1.05;
-      width:100%;
-      max-width:560px;
-      white-space: nowrap;
-      opacity:0;
-      filter: blur(6px);
-      will-change: transform, opacity, filter;
-    }
-    .name-left{ text-align:left; padding-left: 10px; transform: translateX(-56px); }
-    .name-right{ text-align:right; padding-right: 10px; transform: translateX(56px); }
+.name-line {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(38px, 6vw, 62px); /* Tăng nhẹ size cho sang */
+  color: var(--wine);
+  line-height: 1.2; /* Tăng line-height để không mất dấu nặng/hỏi */
+  width: 100%;
+  white-space: nowrap;
+  opacity: 0;
+  filter: blur(6px);
+  will-change: transform, opacity, filter;
+  /* Quan trọng: */
+  overflow: visible !important;
+}
 
+/* Tên Chú Rể: Đẩy sang trái và thêm padding phải để nét gạch không bị cụt */
+.name-left {
+  text-align: left;
+  padding-left: 5px;
+  padding-right: 20px;
+  transform: translateX(-56px);
+}
+
+/* Tên Cô Dâu: Đẩy sang phải và thêm padding phải cực rộng để nét chữ n cuối không bị mất */
+.name-right {
+  text-align: right;
+  padding-right: 40px; /* Tăng mạnh padding này để giữ nét chữ 'n' và dấu */
+  transform: translateX(56px);
+}
     .splash-names.play .name-left{ animation: inLeft 900ms cubic-bezier(.18,.86,.18,1) forwards; }
     .splash-names.play .name-right{ animation: inRight 900ms cubic-bezier(.18,.86,.18,1) 180ms forwards; }
 
@@ -799,53 +902,18 @@
       70%{opacity:1; filter: blur(2px);}
       100%{opacity:1; transform: translateX(0); filter: blur(0);}
     }
-    .love-line{
-      position:absolute;
-      left:0; top:0;
-      width:100%;
-      height:100%;
-      pointer-events:none;
-      z-index: 2;
-      overflow: visible;
-    }
+#main {
+  display: none; /* Mặc định ẩn */
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  position: relative;
+  z-index: 10; /* Thấp hơn trái tim một chút nhưng đủ để hiện lên trên background */
+}
 
-    /* animate draw */
-    .love-line.play #threadLeft{
-      animation: drawPath 820ms cubic-bezier(.18,.86,.18,1) forwards;
-    }
-    .love-line.play #threadRight{
-      animation: drawPath 820ms cubic-bezier(.18,.86,.18,1) 160ms forwards;
-    }
-    .love-line.play #heartPath{
-      animation: drawPath 980ms cubic-bezier(.18,.86,.18,1) 820ms forwards;
-    }
-    @keyframes drawPath{ to{ stroke-dashoffset: 0; } }
-
-    .love-line path{
-      fill:none;
-      stroke: rgba(190, 20, 44, .92);
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-width: 2.2;
-      filter: drop-shadow(0 10px 18px rgba(190,20,44,.18))
-              drop-shadow(0 3px  8px rgba(0,0,0,.12));
-      stroke-dasharray: var(--dash, 1100);
-      stroke-dashoffset: var(--dash, 1100);
-    }
-    .love-line #heartPath{ stroke-width: 2.6; }
-
-    #main{
-      display:none;
-      opacity:0;
-      transform: translateY(18px);
-      filter: blur(12px);
-      transition: opacity .9s ease, transform .9s ease, filter .9s ease;
-    }
-    #main.show{
-      opacity:1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
+#main.show {
+  display: block !important; /* Hiện ra */
+  opacity: 1;
+}
 
     .music-btn{
       position:fixed; top:14px; right:14px;
@@ -905,7 +973,6 @@
       #sparkles, #petalStage{display:none !important}
       .petal{animation:none !important}
       #splash, #splashInner, #main{transition:none !important}
-      .love-line path{ stroke-dashoffset:0 !important }
       .name-line{ opacity:1 !important; transform:none !important; filter:none !important; }
       .center-heart{ opacity:1 !important; transform:translate(-50%,-50%) scale(1) !important; }
     }
@@ -1099,76 +1166,7 @@
       transition: none !important;
     }
   }
-  /* =========================
-    MOMENT REVEAL UPGRADE
-  ========================= */
 
-  .moment .m-photo,
-  .moment .m-text{
-    opacity: 0;
-    transition:
-      opacity 1000ms cubic-bezier(.16,1,.3,1),
-      transform 1000ms cubic-bezier(.16,1,.3,1),
-      filter 1000ms cubic-bezier(.16,1,.3,1);
-    will-change: opacity, transform, filter;
-  }
-
-  /* Ảnh zoom nhẹ + blur */
-  .moment .m-photo{
-    transform: translate3d(-40px, 0, 0) scale(1.08);
-    filter: blur(14px);
-  }
-
-  /* Text trượt vào */
-  .moment .m-text{
-    transform: translate3d(40px, 0, 0);
-    filter: blur(10px);
-  }
-
-  /* Khi show */
-  .moment.show .m-photo{
-    opacity: 1;
-    transform: translate3d(0,0,0) scale(1);
-    filter: blur(0);
-  }
-
-  .moment.show .m-text{
-    opacity: 1;
-    transform: translate3d(0,0,0);
-    filter: blur(0);
-    transition-delay: 250ms;
-  }
-
-  /* mobile: giảm blur/offset để nhẹ hơn */
-  @media (max-width: 520px){
-    .moment .m-photo{ transform: translate3d(-18px, 0, 0); filter: blur(7px); }
-    .moment .m-text { transform: translate3d( 18px, 0, 0); filter: blur(7px); }
-  }
-
-  /* tôn trọng reduce motion */
-  @media (prefers-reduced-motion: reduce){
-    .moment .m-photo,
-    .moment .m-text{
-      opacity: 1 !important;
-      transform: none !important;
-      filter: none !important;
-      transition: none !important;
-    }
-  }
-  /* TYPEWRITER EFFECT */
-  .typewriter span{
-    opacity: 0;
-    display: inline-block;
-    transform: translateY(8px);
-    transition:
-      opacity 300ms ease,
-      transform 300ms ease;
-  }
-
-  .typewriter span.show{
-    opacity: 1;
-    transform: translateY(0);
-  }
   /* =========================
     WORD BY WORD EFFECT
   ========================= */
@@ -1190,29 +1188,46 @@
     transform: translateY(0);
     filter: blur(0);
   }
-.center-heart{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%) scale(0);
-  opacity:0;
+/* Trạng thái ban đầu: Bé tí và ẩn */
+.center-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.5s ease;
+  color: #9B1B30; /* Màu đỏ hồng rực rỡ */
+  z-index: 999;
 }
 
-.heart-svg{
-  width:40px;
-  height:40px;
-  fill:#e63946;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,.25));
+/* 1. Hiện ra và lớn đến kích thước tự nhiên */
+.center-heart.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.5);
 }
 
-.center-heart.show{
-  opacity:1;
-  transform:translate(-50%,-50%) scale(1);
+.center-heart.expand {
+  animation: none;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(120);
+  /* Tăng thời gian lên 2.5 giây để to chậm lại */
+  /* cubic-bezier này giúp tim to ra từ tốn lúc đầu và nhanh dần về cuối */
+  transition: transform 2.5s cubic-bezier(0.4, 0, 1, 1);
+  filter: blur(2px);
 }
 
-.center-heart.expand{
-  transform:translate(-50%,-50%) scale(40);
-  transition:transform 1.2s cubic-bezier(.2,.8,.2,1);
+/* 3. Sau khi bung, trái tim biến mất ngay lập tức */
+.center-heart.burst {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+
+.heart-svg {
+  width: 60px;
+  height: 60px;
+  /* Đảm bảo SVG không bị răng cưa khi scale lớn */
+  shape-rendering: geometricPrecision;
 }
   </style>
   </head>
@@ -1255,9 +1270,9 @@
             <div class="name-line name-right" id="nameBride">Quỳnh Thuận</div>
 
             <div class="center-heart" id="centerHeart" aria-hidden="true">
-<svg viewBox="0 0 24 24" class="heart-svg">
-<path d="M12 21s-6.7-4.35-10-8.28C-1.4 8.3 1.1 3 6 3c2.1 0 4 1.2 5 3 1-1.8 2.9-3 5-3 4.9 0 7.4 5.3 4 9.72C18.7 16.65 12 21 12 21z"/>
-</svg>
+  <svg viewBox="0 0 24 22" class="heart-svg">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/>
+  </svg>
 </div>
           </div>
 
@@ -1460,7 +1475,7 @@
 
         <div class="withyou">WITH YOU</div>
         <div class="withyou-sub">
-          Every moment of each day, loving and missing you dominates every inch of my brain.
+          Every moment of every day, loving and missing you fills every corner of my heart.
         </div>
 
         <div style="text-align:center; padding: 8px 0 16px; color: rgba(110,20,20,.70); font-family:'Playfair Display',serif;">
@@ -1741,7 +1756,6 @@
     }
     addEventListener("resize", () => {
       resizeCanvas();
-      drawLoveLine();
     });
     resizeCanvas();
 
@@ -1929,43 +1943,80 @@
     // =========================
     // Init Splash animation + draw thread
 window.addEventListener("load", async () => {
-
   const box = document.getElementById("splashNames");
   const heart = document.getElementById("centerHeart");
+  const splash = document.getElementById("splash");
+  const main = document.getElementById("main");
 
   try { await document.fonts.ready; } catch {}
 
-  // tên xuất hiện
-  setTimeout(()=>{
+  // Bước 1: Hiện tên cô dâu chú rể
+  setTimeout(() => {
     box.classList.add("play");
-  },200);
+  }, 400);
 
-  // tim xuất hiện
-  setTimeout(()=>{
+  // Bước 2: Trái tim xuất hiện từ scale 0 lên scale 1.5
+  setTimeout(() => {
     heart.classList.add("show");
-  },900);
+  }, 1200);
 
-  // tim phóng to
-  setTimeout(()=>{
+  // Bước 3: Trái tim bắt đầu phóng đại cực lớn che màn hình
+  setTimeout(() => {
     heart.classList.add("expand");
-  },1500);
 
-  // lấy vị trí tim để bung hoa
-  setTimeout(()=>{
-    const rect = heart.getBoundingClientRect();
-    burstPetals(
-      rect.left + rect.width/2,
-      rect.top + rect.height/2
-    );
-    heart.classList.add("burst");
-  },2200);
+    // ĐÁNH LỪA THỊ GIÁC:
+    // Trái tim phóng mất 0.8s, nhưng chỉ cần sau 0.4s là nó đã che kín mắt người xem.
+    // Lúc này ta nổ hoa và hiện Main luôn.
+    setTimeout(() => {
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
 
-  // vào main
-  setTimeout(()=>{
-    openMain();
-  },2700);
+      burstPetals(cx, cy); // Bắn hoa
 
+      // Hiện màn hình chính mờ dần bên dưới
+      main.style.display = "block";
+      requestAnimationFrame(() => {
+        main.classList.add("show");
+      });
+
+      // Làm biến mất lớp Splash và trái tim khổng lồ
+      splash.style.transition = "opacity 0.8s ease";
+      splash.style.opacity = "0";
+
+      setTimeout(() => {
+        splash.style.display = "none";
+        heart.style.display = "none";
+      }, 800);
+
+    }, 2200); // Khoảng thời gian chờ trái tim to (nên nhỏ hơn transition CSS một chút)
+
+  }, 2800);
 });
+// Hàm bổ trợ để đảm bảo Main luôn hiện
+function forceOpenMain() {
+  const splash = document.getElementById("splash");
+  const main = document.getElementById("main");
+  const musicBtn = document.getElementById("musicBtn");
+
+  // Ẩn splash hoàn toàn
+  splash.style.display = "none";
+
+  // Hiện main và kích hoạt animation show
+  main.style.display = "block";
+
+  // Dùng requestAnimationFrame để trình duyệt kịp nhận diện display:block trước khi add class show
+  requestAnimationFrame(() => {
+    main.classList.add("show");
+    musicBtn.classList.add("show");
+
+    // Kích hoạt các hiệu ứng cuộn trang (nếu có)
+    if (typeof setupScrollReveal === "function") setupScrollReveal();
+    if (typeof initMomentReveal === "function") initMomentReveal();
+  });
+
+  // Tự động chơi nhạc nếu trình duyệt cho phép
+  playMusicSmooth();
+}
   // =========================
   function setupScrollReveal(){
     const prefersReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1984,8 +2035,7 @@ window.addEventListener("load", async () => {
       ".cal",
       ".quote-top",
       ".grid4 .gimg",
-      ".withyou",
-      ".withyou-sub"
+      ".withyou"
     ];
 
     const nodes = [];
