@@ -94,7 +94,7 @@
       color: #fff;
       font-family: "Playfair Display", serif;
       font-weight: 700;
-      padding: 10px 14px;
+      padding: 5px 12px;
       border-radius: 999px;
       cursor: pointer;
       transition: transform .12s ease, background .15s ease;
@@ -162,73 +162,67 @@
     .hero-arc {
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 0 14px 0;
+      overflow: hidden;
+      border-radius: var(--rBig);
+      z-index: 1;
     }
 
-    .hero-arc::before {
+    .hero-arc::after {
       content: "";
       position: absolute;
-      width: 132%;
-      height: 132%;
-      left: 50%;
-      transform: translateX(-50%);
-      top: -46%;
-      background: #d9d9d9;
-      border-radius: 999px;
+      inset: 0;
+      pointer-events: none;
+
+      background:
+        radial-gradient(ellipse at center,
+          rgba(0, 0, 0, 0) 40%,
+          rgba(0, 0, 0, .18) 100%);
+
+      mix-blend-mode: multiply;
     }
 
     .hero-photo {
-      position: relative;
-      z-index: 1;
-      display: block;
-      width: auto;
+      width: 100%;
       height: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      align-self: flex-end;
-      max-width: 92%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
     }
 
     .love-arc {
       position: absolute;
-      left: 10px;
-      top: 16px;
-      width: 210px;
-      height: 210px;
-      z-index: 3;
+      right: 16px;
+      top: 14px;
+      width: 240px;
+      height: 240px;
+      z-index: 4;
       pointer-events: none;
-      opacity: .96;
     }
 
     .love-arc text {
       font-family: "Playfair Display", serif;
-      letter-spacing: .38em;
+      letter-spacing: .48em;
+      font-size: 13px;
       font-weight: 600;
-      font-size: 14px;
-      fill: rgba(255, 255, 255, .95);
+      fill: rgba(255, 255, 255, .96);
     }
 
     .line-flower {
       position: absolute;
-      left: 10px;
-      top: 150px;
-      width: 54px;
-      height: 54px;
-      z-index: 3;
-      opacity: .90;
-      pointer-events: none;
-      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .18));
+      right: 26px;
+      top: 110px;
+      width: 44px;
+      height: 44px;
+      z-index: 5;
+
+      opacity: .85;
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, .15));
     }
 
     .line-flower path {
-      stroke: rgba(255, 255, 255, .96);
-      stroke-width: 1.6;
+      stroke: rgba(255, 255, 255, .95);
+      stroke-width: 1.5;
       fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
     }
 
     .cover-info {
@@ -719,7 +713,7 @@
 
     /* photo */
     .m-photo {
-      background: #f6f6f6;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -852,14 +846,14 @@
 
     .gimg img {
       width: 100%;
-      height: 280px;
+      height: 500px;
       object-fit: cover;
       display: block;
     }
 
-    @media(min-width:820px) {
+    @media(min-width:521px) {
       .gimg img {
-        height: 320px;
+        height: 500px;
       }
     }
 
@@ -1094,23 +1088,25 @@
       text-align: left;
       padding-left: 5px;
       padding-right: 20px;
+      margin-top: 20px;
       transform: translateX(-56px);
     }
 
     /* Tên Cô Dâu: Đẩy sang phải và thêm padding phải cực rộng để nét chữ n cuối không bị mất */
     .name-right {
       text-align: right;
-      margin-top: 10px;
       padding-top: 40px;
       padding-right: 120px;
-      /* Tăng mạnh padding này để giữ nét chữ 'n' và dấu */
       transform: translateX(56px);
     }
 
     @media (max-width:600px) {
       .name-right {
-        margin-top: 30px;
         padding-right: 80px;
+      }
+
+      .name-left {
+        margin-top: 5px;
       }
     }
 
@@ -1337,8 +1333,8 @@
       }
 
       .btn {
-        width: 100%;
-        max-width: 360px;
+        width: 50%;
+        max-width: 300px;
         justify-content: center;
         padding: 10px 12px;
         font-size: 10px;
@@ -1477,7 +1473,7 @@
       }
 
       .big-num {
-        font-size: 28px;
+        font-size: 22px;
       }
 
       .lunar {
@@ -1610,7 +1606,7 @@
       }
 
       .gimg img {
-        height: 240px;
+        height: 440px;
       }
 
       .withyou {
@@ -1638,7 +1634,7 @@
       }
 
       .splash-sub {
-        font-size: 13px;
+        font-size: 12px;
       }
 
       .center-heart {
@@ -1753,11 +1749,11 @@
     /* Trạng thái ban đầu: Bé tí và ẩn */
     .center-heart {
       position: absolute;
-      top: 45%;
+      top: 48%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0);
+      transform: translate(-50%, -50%) scale(0.1);
       opacity: 0;
-      transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+      transition: transform 1.8s cubic-bezier(.12, .9, .3, 1), opacity 0.5s ease;
       color: #9B1B30;
       /* Màu đỏ hồng rực rỡ */
       z-index: 999;
@@ -1765,7 +1761,7 @@
 
     @media (max-width: 500px) {
       .center-heart {
-        top: 43%;
+        top: 44%;
       }
     }
 
@@ -1899,7 +1895,7 @@
               <path id="arcPath" d="M 28 190 A 110 110 0 0 1 190 28" />
             </defs>
             <text>
-              <textPath href="#arcPath" startOffset="2%">I&nbsp;LOVE&nbsp;YOU</textPath>
+              <textPath href="#arcPath" startOffset="2%">I LOVE YOU</textPath>
             </text>
           </svg>
 
@@ -1989,7 +1985,7 @@
           <span class="sep">|</span>
           <span class="big-num" id="cerDate">22.03.2026</span>
           <span class="sep">|</span>
-          <span class="big-num" style="font-size:28px;color:var(--ink)" id="cerDay">Chủ Nhật</span>
+          <span class="big-num" style="color:var(--ink)" id="cerDay">Chủ Nhật</span>
         </div>
         <div class="lunar" id="lunarText">Tức ngày ...</div>
       </div>
@@ -2001,11 +1997,10 @@
         <div style="margin-top:10px;">
           <a class="btn" id="btnMapMain" target="_blank" rel="noreferrer">
 
-            <svg class="icon-map" viewBox="0 0 24 24">
+            <svg class="icon-map" viewBox="0 0 20 22">
               <path
                 d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
             </svg>
-
             Chỉ đường
           </a>
         </div>
@@ -2023,7 +2018,7 @@
           <div style="margin-top:10px;">
             <a class="btn" id="btnMapGroom" target="_blank" rel="noreferrer">
 
-              <svg class="icon-map" viewBox="0 0 24 24">
+              <svg class="icon-map" viewBox="0 0 20 22">
                 <path
                   d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
               </svg>
@@ -2044,7 +2039,7 @@
           <div style="margin-top:10px;">
             <a class="btn" id="btnMapBride" target="_blank" rel="noreferrer">
 
-              <svg class="icon-map" viewBox="0 0 24 24">
+              <svg class="icon-map" viewBox="0 0 20 22">
                 <path
                   d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
               </svg>
@@ -2587,7 +2582,7 @@
       const main = document.getElementById("main");
 
       try { await document.fonts.ready; } catch { }
-
+      if (MUSIC_DEFAULT_ON) await playMusicSmooth();
       // Bước 1: Hiện tên cô dâu chú rể
       setTimeout(() => {
         box.classList.add("play");
@@ -2607,8 +2602,6 @@
         setTimeout(() => {
 
           // BƯỚC 3: PHÓNG LỚN (Sửa đoạn này)
-
-          // Ép trình duyệt tính toán lại trước khi Expand
           void heart.offsetWidth;
 
           heart.classList.remove("shake");
@@ -2616,33 +2609,32 @@
           void heart.offsetWidth;
           heart.classList.add("expand");
 
-          // BƯỚC QUAN TRỌNG: Gọi tung hoa khi tim đang nở rộ
+
+          requestAnimationFrame(() => {
+            main.classList.add("show");
+          });
+
+          /* splash fade sớm hơn */
+          splash.style.transition = "opacity .6s ease";
+          splash.style.opacity = "0";
+         /* HIỆN MAIN NGAY KHI TIM BẮT ĐẦU NỞ */
+          main.style.display = "block";
           setTimeout(() => {
+
             const cx = window.innerWidth / 2;
             const cy = window.innerHeight / 2;
-            main.style.display = "block";
-            // 1. Tung hoa bùng nổ
-            burstPetals(cx, cy);
 
-            // 2. Bắt đầu mưa hoa rơi nhẹ (Rain) nếu bạn muốn sau khi nổ là hoa rơi
+            burstPetals(cx, cy);
             startRain(4000);
 
-            // 3. Hiện màn hình Main
+            musicBtn.classList.add("show");
 
-            requestAnimationFrame(() => {
-              main.classList.add("show");
-              musicBtn.classList.add("show");
-            });
-
-            // Làm mờ Splash nhanh hơn (giảm từ 1000ms xuống 400ms)
-            splash.style.transition = "opacity 0.4s ease";
-            splash.style.opacity = "0";
             setTimeout(() => {
               splash.style.display = "none";
               heart.style.display = "none";
-            }, 1000);
+            }, 700);
 
-          }, 1200);
+          }, 300);
 
         }, 3000); // Thời gian rung là 1s
 
