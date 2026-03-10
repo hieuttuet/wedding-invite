@@ -93,7 +93,7 @@
       background: var(--wine);
       color: #fff;
       font-family: "Playfair Display", serif;
-      font-weight: 700;
+      font-weight: 500;
       padding: 5px 12px;
       border-radius: 999px;
       cursor: pointer;
@@ -212,9 +212,9 @@
 
     .love-arc text {
       font-family: "Playfair Display", serif;
-      font-size: 12px;
+      font-size: 16px;
       letter-spacing: .35em;
-      font-weight: 600;
+      font-weight: 500;
       fill: rgba(255, 255, 255, .96);
     }
 
@@ -354,7 +354,7 @@
 
     /* hearts around avatar */
     .avatar-heart {
-      position: absolute;
+      position: fixed;
       left: 0;
       top: 0;
       width: 14px;
@@ -364,31 +364,46 @@
       transform: translate3d(0, 0, 0) scale(.9);
       filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .15));
       will-change: transform, opacity;
-      animation: heartFloat 1100ms cubic-bezier(.18, .86, .22, 1) forwards;
+      animation: heartOrbit 2.5s linear forwards;
       z-index: 3000;
+    }
+
+    .avatar-heart .heart {
+      animation: heartFly 1.2s ease-out 2.5s forwards;
     }
 
     .avatar-heart::before {
       content: "❤";
       display: block;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 14px;
       color: rgba(110, 20, 20, .75);
+      animation: heartFly 1.2s ease-out 2.5s forwards;
     }
 
-    @keyframes heartFloat {
+    /* quay quanh avatar */
+    @keyframes heartOrbit {
       0% {
-        opacity: 0;
-        transform: translate3d(var(--x0), var(--y0), 0) scale(.85) rotate(var(--r0));
-      }
-
-      15% {
+        transform: rotate(0deg) translateX(40px) rotate(0deg);
         opacity: 1;
       }
 
       100% {
+        transform: rotate(360deg) translateX(40px) rotate(-360deg);
+        opacity: 1;
+      }
+    }
+
+    /* bay ra ngoài */
+    @keyframes heartFly {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(var(--x), var(--y)) scale(.3);
         opacity: 0;
-        transform: translate3d(var(--x1), var(--y1), 0) scale(1.2) rotate(var(--r1));
       }
     }
 
@@ -769,7 +784,7 @@
 
     .moment .m-photo {
       transform: translateX(-40px) scale(1.06);
-      filter: blur(8px);
+      filter: blur(6px);
     }
 
     .moment .m-text {
@@ -853,17 +868,16 @@
     }
 
     .withyou {
-      font-family:"Playfair Display",serif;
+      font-family: "Playfair Display", serif;
       text-align: center;
       margin: 18px 0 6px;
-      font-family: "Playfair Display", serif;
       letter-spacing: .14em;
       font-size: 26px;
       color: var(--wine);
     }
 
     .withyou-sub {
-       font-family:"Cormorant Garamond",serif;
+      font-family: "Cormorant Garamond", serif;
       text-align: center;
       color: var(--ink);
       max-width: 120ch;
@@ -898,11 +912,6 @@
 
     #petalStage.show {
       opacity: 1;
-    }
-
-    .petal.burst {
-      /* Thêm hiệu ứng xoay 3D để cánh hoa trông thật hơn */
-      animation: petalBurst 1.5s cubic-bezier(0.12, 0.82, 0.16, 1) forwards;
     }
 
     .petal-layer {
@@ -1355,11 +1364,11 @@
         top: 2%;
         right: 2%;
         width: 45%;
-        height: 45%;
+        height: 50%;
       }
 
       .love-arc text {
-        font-size: 10px;
+        font-size: 14px;
         letter-spacing: .25em;
       }
 
@@ -1653,7 +1662,7 @@
     .reveal {
       opacity: 0;
       transform: translate3d(0, 18px, 0);
-      filter: blur(8px);
+      filter: blur(6px);
       transition:
         opacity 820ms cubic-bezier(.16, 1, .3, 1),
         transform 820ms cubic-bezier(.16, 1, .3, 1),
@@ -1683,7 +1692,7 @@
     /* ảnh: mượt hơn, không blur quá mạnh */
     .reveal.img {
       transform: translate3d(0, 10px, 0) scale(.985);
-      filter: blur(8px);
+      filter: blur(6px);
     }
 
     .reveal.img.show {
@@ -1771,7 +1780,7 @@
       animation: none !important;
       opacity: 1;
       /* Phóng lớn kịch sàn */
-      transform: translate(-50%, -50%) scale(120) !important;
+      transform: translate(-50%, -50%) scale(100) !important;
       /* Ép thời gian phóng to là 2.5s mượt mà */
       transition: transform 1s ease-in-out !important;
       filter: blur(4px);
@@ -1895,7 +1904,7 @@
           </svg>
 
           <div class="hero-arc">
-            <img class="hero-photo" src="img/hero.jpg" alt="Ảnh cưới chính (hero)">
+            <img class="hero-photo" src="img/hero.jpg" alt="Ảnh cưới chính (hero)" loading="lazy">
           </div>
         </div>
 
@@ -1910,7 +1919,7 @@
           <div class="info-title">LỄ THÀNH HÔN</div>
           <div class="info-line"></div>
           <div class="info-row">
-            <div>CHỦ NHẬT • 10:00</div>
+            <div>CHỦ NHẬT • 09:00</div>
             <div class="info-date">22 . 03 . 2026</div>
           </div>
         </div>
@@ -2049,7 +2058,7 @@
     <!-- VIP moments -->
     <div class="moments">
       <div class="moment">
-        <div class="m-photo"><img src="img/p1.jpg" alt="Khoảnh khắc 1"></div>
+        <div class="m-photo"><img src="img/p1.jpg" alt="Khoảnh khắc 1" loading="lazy"></div>
         <div class="m-text">
           <h3 class="m-title">Cảm Ơn</h3>
           <p class="m-quote">“Gặp đúng người, đúng thời điểm — mọi điều bỗng trở nên dịu dàng.”</p>
@@ -2058,7 +2067,7 @@
       </div>
 
       <div class="moment reverse">
-        <div class="m-photo"><img src="img/p2.jpg" alt="Khoảnh khắc 2"></div>
+        <div class="m-photo"><img src="img/p2.jpg" alt="Khoảnh khắc 2" loading="lazy"></div>
         <div class="m-text">
           <h3 class="m-title">Vì Em</h3>
           <p class="m-quote">“Tình yêu không cần hoàn hảo — chỉ cần chân thành và luôn ở cạnh nhau.”</p>
@@ -2067,7 +2076,7 @@
       </div>
 
       <div class="moment">
-        <div class="m-photo"><img src="img/p3.jpg" alt="Khoảnh khắc 03"></div>
+        <div class="m-photo"><img src="img/p3.jpg" alt="Khoảnh khắc 03" loading="lazy"></div>
         <div class="m-text">
           <h3 class="m-title">Đã Đến</h3>
           <p class="m-quote">“Hôm nay là lời hứa, ngày mai là hành trình — cùng nhau đi đến tận cùng.”</p>
@@ -2148,11 +2157,6 @@
     document.getElementById("mainAddr").textContent = CEREMONY.address;
     document.getElementById("btnMapMain").href = CEREMONY.map;
 
-    document.getElementById("gPartyTime").textContent = GROOM_PARTY.time;
-    document.getElementById("gPartyDate").textContent = GROOM_PARTY.dateText;
-    document.getElementById("gPartyLunar").textContent = GROOM_PARTY.lunar;
-    document.getElementById("btnMapGroom").href = GROOM_PARTY.map;
-
     document.getElementById("gPartyTitle").textContent = GROOM_PARTY.title;
     document.getElementById("gPartyTime").textContent = GROOM_PARTY.time;
     document.getElementById("gPartyDate").textContent = GROOM_PARTY.dateText;
@@ -2228,24 +2232,6 @@
       setParallax((e.gamma / 45) * 12, (e.beta / 45) * 12);
     }, true);
 
-
-    function makeSoftLinkPath(x0, y0, x1, y1) {
-      const dx = x1 - x0;
-      const dy = y1 - y0;
-      const dist = Math.hypot(dx, dy) || 1;
-
-      const sag = Math.max(10, Math.min(36, dist * 0.10));
-      const mx = x0 + dx * 0.55;
-      const my = y0 + dy * 0.55 + sag;
-
-      return pointsToSmoothPath([
-        { x: x0, y: y0 },
-        { x: x0 + dx * 0.18, y: y0 + dy * 0.10 },
-        { x: mx, y: my },
-        { x: x0 + dx * 0.82, y: y0 + dy * 0.90 },
-        { x: x1, y: y1 },
-      ]);
-    }
 
     // =========================
     // PETALS
@@ -2502,36 +2488,71 @@
     // Hearts around avatars
     // =========================
     function spawnAvatarHearts(avatarEl, count = 14) {
+
       if (!avatarEl) return;
+
       const rect = avatarEl.getBoundingClientRect();
-      const baseX = rect.left + rect.width / 2;
-      const baseY = rect.top + rect.height / 2;
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      const hearts = ["❤️", "💗", "💖"];
 
       for (let i = 0; i < count; i++) {
+
         const h = document.createElement("div");
         h.className = "avatar-heart";
-        const a = Math.random() * Math.PI * 2;
-        const r0 = 8 + Math.random() * 18;
-        const r1 = 55 + Math.random() * 85;
-        const x0 = baseX + Math.cos(a) * r0;
-        const y0 = baseY + Math.sin(a) * r0;
-        const x1 = baseX + Math.cos(a) * r1 + (Math.random() * 18 - 9);
-        const y1 = baseY + Math.sin(a) * r1 - (30 + Math.random() * 55);
+        h.innerHTML = `<span class="heart">${hearts[Math.floor(Math.random() * hearts.length)]}</span>`;
 
-        h.style.setProperty("--x0", `${x0}px`);
-        h.style.setProperty("--y0", `${y0}px`);
-        h.style.setProperty("--x1", `${x1}px`);
-        h.style.setProperty("--y1", `${y1}px`);
-        h.style.setProperty("--r0", `${(Math.random() * 90 - 45)}deg`);
-        h.style.setProperty("--r1", `${(Math.random() * 360 + 180)}deg`);
-        h.style.animationDelay = `${Math.random() * 180}ms`;
+        const angle = (360 / count) * i;
+
+        const flyX = (Math.random() * 180) - 90;
+        const flyY = -(Math.random() * 200 + 60);
+
+        h.style.left = cx + "px";
+        h.style.top = cy + "px";
+
+        h.style.transform = `rotate(${angle}deg) translateX(36px)`;
+
+        h.style.setProperty("--x", flyX + "px");
+        h.style.setProperty("--y", flyY + "px");
 
         document.body.appendChild(h);
-        h.addEventListener("animationend", () => h.remove());
+
+        setTimeout(() => h.remove(), 3800);
       }
     }
 
-    // =========================
+    function initAvatarHeartEffect() {
+
+      const avatars = [
+        document.getElementById("groomAvatar"),
+        document.getElementById("brideAvatar")
+      ];
+
+      const io = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            const n = isMobile() ? 10 : 14;
+
+            spawnAvatarHearts(entry.target, n);
+
+            io.unobserve(entry.target); // chạy 1 lần
+          }
+
+        });
+
+      }, {
+        threshold: .45
+      });
+
+      avatars.forEach(a => {
+        if (a) io.observe(a);
+      });
+
+    }
     // Splash -> Main (AUTO)
     // =========================
     const splash = document.getElementById("splash");
@@ -2559,10 +2580,6 @@
         requestAnimationFrame(() => main.classList.add("show"));
         musicBtn.classList.add("show");
 
-        const n = isMobile() ? 10 : 14;
-        spawnAvatarHearts(document.getElementById("groomAvatar"), n);
-        spawnAvatarHearts(document.getElementById("brideAvatar"), n);
-
         if (MUSIC_DEFAULT_ON) await playMusicSmooth();
       }, 900);
     }
@@ -2578,7 +2595,6 @@
       const main = document.getElementById("main");
 
       try { await document.fonts.ready; } catch { }
-      if (MUSIC_DEFAULT_ON) await playMusicSmooth();
       // Bước 1: Hiện tên cô dâu chú rể
       setTimeout(() => {
         box.classList.add("play");
@@ -2632,11 +2648,11 @@
 
           }, 300);
 
-        }, 2500); // Thời gian rung là 1s
+        }, 2000); // Thời gian rung là 1s
 
       }, 2000);
 
-    }, 1200);
+    },);
     // Hàm bổ trợ để đảm bảo Main luôn hiện
 
     function setupScrollReveal() {
@@ -2766,6 +2782,30 @@
       clearTimeout(window.__momentResize);
       window.__momentResize = setTimeout(initMomentReveal, 120);
     });
+    function runAvatarHeartWhenMainReady() {
+
+      const main = document.getElementById("main");
+
+      if (main.classList.contains("show")) {
+        initAvatarHeartEffect();
+      }
+      else {
+
+        const mo = new MutationObserver(() => {
+
+          if (main.classList.contains("show")) {
+            initAvatarHeartEffect();
+            mo.disconnect();
+          }
+
+        });
+
+        mo.observe(main, { attributes: true, attributeFilter: ["class"] });
+      }
+
+    }
+
+    runAvatarHeartWhenMainReady();
   </script>
 </body>
 
