@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400;500&family=Great+Vibes&display=swap"
     rel="stylesheet">
 
   <style>
@@ -761,7 +761,17 @@
       line-height: 1.7;
       color: rgba(28, 15, 20, .78);
     }
+.m-quote span{
+  opacity:0;
+  display:inline-block;
+  transform: translateY(8px);
+  transition: all .45s ease;
+}
 
+.m-quote span.show{
+  opacity:1;
+  transform: translateY(0);
+}
     .m-sign {
       font-family: "Great Vibes", cursive;
       color: rgba(110, 20, 20, .92);
@@ -784,12 +794,12 @@
 
     .moment .m-photo {
       transform: translateX(-40px) scale(1.06);
-      filter: blur(6px);
+      filter: blur(4);
     }
 
     .moment .m-text {
       transform: translateX(40px);
-      filter: blur(6px);
+      filter: blur(4);
     }
 
     .moment.show .m-photo {
@@ -811,12 +821,12 @@
 
       .moment .m-photo {
         transform: translateX(-18px);
-        filter: blur(6px);
+        filter: blur(2);
       }
 
       .moment .m-text {
         transform: translateX(18px);
-        filter: blur(6px);
+        filter: blur(2);
       }
 
     }
@@ -855,8 +865,8 @@
     }
 
     .gimg img {
-      border:2px solid #bdb0b0;
-      padding:4px;
+      border: 2px solid #bdb0b0;
+      padding: 4px;
       border-radius: 8px;
       width: 100%;
       height: 500px;
@@ -869,7 +879,11 @@
         height: 500px;
       }
     }
-
+@media(min-width:700px) {
+      .gimg img {
+        height: 700px;
+      }
+    }
     .withyou {
       font-family: "Playfair Display", serif;
       text-align: center;
@@ -1000,7 +1014,8 @@
     #splash.fade {
       opacity: 0;
       transform: scale(1.06);
-      filter: blur(12px);
+      opacity: 0;
+      transform: translateY(20px);
     }
 
     #splashInner {
@@ -1010,7 +1025,7 @@
       background: rgba(255, 255, 255, .92);
       color: var(--wine);
       border: 1px solid rgba(110, 20, 20, .25);
-      box-shadow: 0 30px 90px rgba(0, 0, 0, .25);
+      box-shadow: 0 14px 40px rgba(0,0,0,.18);
       text-align: center;
       transition: all .8s cubic-bezier(.22, .61, .36, 1);
       overflow: visible;
@@ -1131,7 +1146,8 @@
       0% {
         opacity: 0;
         transform: translateX(-58px);
-        filter: blur(7px);
+        opacity: 0;
+        transform: translateY(20px);
       }
 
       70% {
@@ -1150,7 +1166,7 @@
       0% {
         opacity: 0;
         transform: translateX(58px);
-        filter: blur(7px);
+        filter: blur(4px);
       }
 
       70% {
@@ -1613,8 +1629,8 @@
       }
 
       .gimg img {
-        border:2px solid #bdb0b0;
-      padding:2px;
+        border: 2px solid #bdb0b0;
+        padding: 2px;
         height: 440px;
       }
 
@@ -1667,7 +1683,7 @@
     .reveal {
       opacity: 0;
       transform: translate3d(0, 18px, 0);
-      filter: blur(6px);
+      filter: blur(4px);
       transition:
         opacity 820ms cubic-bezier(.16, 1, .3, 1),
         transform 820ms cubic-bezier(.16, 1, .3, 1),
@@ -1697,7 +1713,7 @@
     /* ảnh: mượt hơn, không blur quá mạnh */
     .reveal.img {
       transform: translate3d(0, 10px, 0) scale(.985);
-      filter: blur(6px);
+      filter: blur(4px);
     }
 
     .reveal.img.show {
@@ -1717,7 +1733,7 @@
       }
 
       .reveal.img {
-        filter: blur(6px);
+        filter: blur(4px);
       }
     }
 
@@ -1741,7 +1757,7 @@
       opacity: 0;
       display: inline-block;
       transform: translateY(14px);
-      filter: blur(6px);
+      filter: blur(4px);
       transition:
         opacity 500ms cubic-bezier(.16, 1, .3, 1),
         transform 500ms cubic-bezier(.16, 1, .3, 1),
@@ -1844,12 +1860,12 @@
       justify-content: center;
       align-items: flex-end;
       gap: 12px;
-      margin-top: 25px;
+      margin-top: 10px;
     }
 
     .wedding-photos img {
-      border:2px solid #bdb0b0;
-      padding:2px;
+      border: 2px solid #bdb0b0;
+      padding: 2px;
       border-radius: 14px;
       object-fit: cover;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -1858,46 +1874,46 @@
     /* ảnh hai bên */
     .photo.left,
     .photo.right {
-      width: 140px;
-      height: 200px;
+      width: 155px;
+      height: 210px;
     }
 
     /* ảnh giữa */
     .photo.center {
-      width: 180px;
-      height: 250px;
+      width: 185px;
+      height: 270px;
     }
 
     /* trạng thái ban đầu */
 
     .reveal-left {
       opacity: 0;
-      transform: translateX(-120px) rotate(-12deg);
-      transition: all 1s ease;
+      transform: translateX(-40px) rotate(-12deg);
+      transition: transform 1s ease, opacity 1s ease;
     }
 
     .reveal-right {
       opacity: 0;
-      transform: translateX(120px) rotate(12deg);
-      transition: all 1s ease;
+      transform: translateX(40px) rotate(12deg);
+      transition: transform 1s ease, opacity 1s ease;
     }
 
     .reveal-center {
       opacity: 0;
       transform: scale(.85);
-      transition: all 1s ease;
+      transition: transform 1s ease, opacity 1s ease;
     }
 
     /* khi hiện */
 
     .reveal-left.show {
       opacity: 1;
-      transform: translateX(0) rotate(-6deg);
+      transform: translateX(0) rotate(-10deg);
     }
 
     .reveal-right.show {
       opacity: 1;
-      transform: translateX(0) rotate(6deg);
+      transform: translateX(0) rotate(10deg);
     }
 
     .reveal-center.show {
@@ -1905,13 +1921,14 @@
       transform: scale(1);
     }
 
-    @media (max-width:520px) {
-.wedding-photos {
-  gap: 5px;
-}
+    @media (max-width:520px) and (min-width:321px) {
+      .wedding-photos {
+        gap: 5px;
+      }
+
       .photo.left,
       .photo.right {
-        width: 80px;
+        width: 75px;
         height: 130px;
       }
 
@@ -1921,6 +1938,25 @@
       }
 
     }
+    @media (max-width:320px) {
+      .wedding-photos {
+        gap: 1px;
+        padding: 1px;
+      }
+
+      .photo.left,
+      .photo.right {
+        width: 40px;
+        height: 90px;
+      }
+
+      .photo.center {
+        width:50px;
+        height: 110px;
+      }
+
+    }
+
   </style>
 </head>
 
@@ -2027,7 +2063,7 @@
           <div class="person">
             <div class="role">Chú rể</div>
             <div class="avatar" id="groomAvatar">
-              <img src="img/groom.jpg" alt="Chú rể Trần Hiếu">
+              <img src="img/groom.jpg" alt="Chú rể Trần Hiếu" loading="lazy">
             </div>
             <div class="names-script">Trần Hiếu</div>
             <div class="signature">Groom</div>
@@ -2041,7 +2077,7 @@
           <div class="person">
             <div class="role">Cô dâu</div>
             <div class="avatar" id="brideAvatar">
-              <img src="img/bride.jpg" alt="Cô dâu Quỳnh Thuận">
+              <img src="img/bride.jpg" alt="Cô dâu Quỳnh Thuận" loading="lazy">
             </div>
             <div class="names-script">Quỳnh Thuận</div>
             <div class="signature">Bride</div>
@@ -2060,9 +2096,9 @@
         <p class="invite-sub">THAM DỰ LỄ THÀNH HÔN CỦA CHÚNG MÌNH</p>
       </div>
       <div class="wedding-photos">
-        <img src="img/photo1.jpg" class="photo left reveal-left">
-        <img src="img/photo2.jpg" class="photo center reveal-center">
-        <img src="img/photo3.jpg" class="photo right reveal-right">
+        <img src="img/photo1.jpg" class="photo left reveal-left" loading="lazy">
+        <img src="img/photo2.jpg" class="photo center reveal-center" loading="lazy">
+        <img src="img/photo3.jpg" class="photo right reveal-right" loading="lazy">
       </div>
 
       <div class="main-time">
@@ -2183,12 +2219,12 @@
       <div class="quote-top">Hôn nhân là chuyện cả đời<br />Yêu người vừa ý, Cưới người Mình thương</div>
 
       <div class="grid4">
-        <div class="gimg"><img src="img/g1.jpg" alt="Gallery 1"></div>
-        <div class="gimg"><img src="img/g2.jpg" alt="Gallery 2"></div>
-        <div class="gimg"><img src="img/g3.jpg" alt="Gallery 3"></div>
-        <div class="gimg"><img src="img/g4.jpg" alt="Gallery 4"></div>
-        <div class="gimg"><img src="img/g5.jpg" alt="Gallery 5"></div>
-        <div class="gimg"><img src="img/g6.jpg" alt="Gallery 6"></div>
+        <div class="gimg"><img src="img/g1.jpg" alt="Gallery 1" loading="lazy"></div>
+        <div class="gimg"><img src="img/g2.jpg" alt="Gallery 2" loading="lazy"></div>
+        <div class="gimg"><img src="img/g3.jpg" alt="Gallery 3" loading="lazy"></div>
+        <div class="gimg"><img src="img/g4.jpg" alt="Gallery 4" loading="lazy"></div>
+        <div class="gimg"><img src="img/g5.jpg" alt="Gallery 5" loading="lazy"></div>
+        <div class="gimg"><img src="img/g6.jpg" alt="Gallery 6" loading="lazy"></div>
       </div>
 
       <div class="withyou">WITH YOU</div>
@@ -2202,7 +2238,6 @@
       </div>
     </section>
   </div>
-
   <div class="toast" id="toast">OK</div>
 
   <script>
@@ -2234,7 +2269,6 @@
       place: "Tư Gia Nhà Gái: Thôn Hạc Đình,  Vĩnh Hưng , Phú Thọ",
       map: "https://maps.app.goo.gl/YhhPtKRZmQWeUy7s9"
     };
-
     // Nhạc nền: upload mp3 vào: audio/song.mp3
     const MUSIC_SRC = "audio/song.mp3";
     const MUSIC_DEFAULT_ON = true;
@@ -2242,7 +2276,6 @@
     // Calendar
     const CALENDAR = { year: 2026, monthIndex: 2, heartDay: 21, markDay: 22 };
     // =========================
-
     // Fill texts
     document.getElementById("cerTime").textContent = CEREMONY.time;
     document.getElementById("cerDate").textContent = CEREMONY.dateText;
@@ -2363,7 +2396,7 @@
     function burstPetals(cx, cy) {
       petalStage.classList.add("show");
       // Tăng số lượng cánh hoa lên (ví dụ 150 cho máy tính, 100 cho điện thoại)
-      const count = isMobile() ? 100 : 150;
+      const count = isMobile() ? 80 : 150;
 
       for (let i = 0; i < count; i++) {
         const layer = (i % 3 === 0) ? petalNear : (i % 3 === 1 ? petalMid : petalFar);
@@ -2745,7 +2778,7 @@
 
           }, 300);
 
-        }, 2000); // Thời gian rung là 1s
+        }, 1800); // Thời gian rung là 1s
 
       }, 2000);
 
@@ -2828,7 +2861,24 @@
         mo.observe(main, { attributes: true, attributeFilter: ["class"] });
       }
     }
+function typeWords(el){
 
+  const text = el.textContent.trim();
+  el.innerHTML = "";
+
+  const words = text.split(" ");
+
+  words.forEach((word,i)=>{
+    const span = document.createElement("span");
+    span.innerHTML = word + "&nbsp;";
+    el.appendChild(span);
+
+    setTimeout(()=>{
+      span.classList.add("show");
+    }, i*150); // tốc độ hiện từng từ
+  });
+
+}
     runRevealWhenMainReady();
     function initMomentReveal() {
       const moments = document.querySelectorAll(".moment");
@@ -2843,8 +2893,12 @@
             const quote = entry.target.querySelector(".m-quote");
 
             if (quote && !quote.classList.contains("typed")) {
-              quote.classList.add("typed", "typewriter-word");
-            }
+
+  quote.classList.add("typed");
+
+  typeWords(quote);
+
+}
 
           } else {
             entry.target.classList.remove("show");
@@ -2905,54 +2959,54 @@
     runAvatarHeartWhenMainReady();
     function runWeddingPhotoWhenMainReady() {
 
-  const main = document.getElementById("main");
-
-  if (main.classList.contains("show")) {
-    initWeddingPhotoReveal();
-  }
-  else {
-
-    const mo = new MutationObserver(() => {
+      const main = document.getElementById("main");
 
       if (main.classList.contains("show")) {
         initWeddingPhotoReveal();
-        mo.disconnect();
       }
+      else {
 
-    });
+        const mo = new MutationObserver(() => {
 
-    mo.observe(main, { attributes: true, attributeFilter: ["class"] });
-  }
-}
+          if (main.classList.contains("show")) {
+            initWeddingPhotoReveal();
+            mo.disconnect();
+          }
 
-runWeddingPhotoWhenMainReady();
+        });
+
+        mo.observe(main, { attributes: true, attributeFilter: ["class"] });
+      }
+    }
+
+    runWeddingPhotoWhenMainReady();
     function initWeddingPhotoReveal() {
 
-  const photos = document.querySelectorAll(
-    ".reveal-left, .reveal-right, .reveal-center"
-  );
+      const photos = document.querySelectorAll(
+        ".reveal-left, .reveal-right, .reveal-center"
+      );
 
-  if (!photos.length) return;
+      if (!photos.length) return;
 
-  const io = new IntersectionObserver((entries) => {
+      const io = new IntersectionObserver((entries) => {
 
-    entries.forEach(entry => {
+        entries.forEach(entry => {
 
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      } else {
-        entry.target.classList.remove("show");
-      }
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          } else {
+            entry.target.classList.remove("show");
+          }
 
-    });
+        });
 
-  }, {
-    threshold: 0.35,
-    rootMargin: "0px 0px -10% 0px"
-  });
+      }, {
+        threshold: 0.35,
+        rootMargin: "0px 0px -10% 0px"
+      });
 
-  photos.forEach(p => io.observe(p));
-}
+      photos.forEach(p => io.observe(p));
+    }
   </script>
 </body>
 
