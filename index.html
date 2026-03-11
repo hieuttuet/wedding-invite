@@ -1859,7 +1859,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      gap: 12px;
+      gap: 18px;
       margin-top: 10px;
     }
 
@@ -1923,7 +1923,7 @@
 
     @media (max-width:520px) and (min-width:321px) {
       .wedding-photos {
-        gap: 5px;
+        gap: 7px;
       }
 
       .photo.left,
@@ -1940,7 +1940,7 @@
     }
     @media (max-width:320px) {
       .wedding-photos {
-        gap: 1px;
+        gap: 3px;
         padding: 1px;
       }
 
@@ -1962,7 +1962,7 @@
 
 <body>
   <!-- sparkles background -->
-  <canvas id="sparkles"></canvas>
+  <!-- <canvas id="sparkles"></canvas> -->
 
   <!-- Petal FX stage -->
   <div id="petalStage" aria-hidden="true">
@@ -2485,86 +2485,86 @@
     // =========================
     // Sparkles (canvas)
     // =========================
-    const canvas = document.getElementById("sparkles");
-    const ctx = canvas.getContext("2d");
-    let W = 0, H = 0, DPR = 1;
+    // const canvas = document.getElementById("sparkles");
+    // const ctx = canvas.getContext("2d");
+    // let W = 0, H = 0, DPR = 1;
 
-    function resizeCanvas() {
-      const mobile = isMobile();
-      DPR = mobile ? 1 : Math.max(1, Math.min(2, devicePixelRatio || 1));
-      W = canvas.width = Math.floor(innerWidth * DPR);
-      H = canvas.height = Math.floor(innerHeight * DPR);
-      canvas.style.width = innerWidth + "px";
-      canvas.style.height = innerHeight + "px";
-    }
-    addEventListener("resize", () => {
-      resizeCanvas();
-    });
-    resizeCanvas();
+    // function resizeCanvas() {
+    //   const mobile = isMobile();
+    //   DPR = mobile ? 1 : Math.max(1, Math.min(2, devicePixelRatio || 1));
+    //   W = canvas.width = Math.floor(innerWidth * DPR);
+    //   H = canvas.height = Math.floor(innerHeight * DPR);
+    //   canvas.style.width = innerWidth + "px";
+    //   canvas.style.height = innerHeight + "px";
+    // }
+    // addEventListener("resize", () => {
+    //   resizeCanvas();
+    // });
+    // resizeCanvas();
 
-    const stars = [];
-    function buildStars() {
-      stars.length = 0;
-      const count = isMobile() ? 35 : 85;
-      for (let i = 0; i < count; i++) {
-        stars.push({
-          x: Math.random() * W, y: Math.random() * H,
-          r: (0.6 + Math.random() * 1.8) * DPR,
-          a: 0.18 + Math.random() * 0.7,
-          tw: 0.006 + Math.random() * 0.014,
-          vx: (-0.015 + Math.random() * 0.03) * DPR,
-          vy: (0.008 + Math.random() * 0.05) * DPR
-        });
-      }
-    }
-    buildStars();
-    addEventListener("resize", buildStars);
+    // const stars = [];
+    // function buildStars() {
+    //   stars.length = 0;
+    //   const count = isMobile() ? 35 : 85;
+    //   for (let i = 0; i < count; i++) {
+    //     stars.push({
+    //       x: Math.random() * W, y: Math.random() * H,
+    //       r: (0.6 + Math.random() * 1.8) * DPR,
+    //       a: 0.18 + Math.random() * 0.7,
+    //       tw: 0.006 + Math.random() * 0.014,
+    //       vx: (-0.015 + Math.random() * 0.03) * DPR,
+    //       vy: (0.008 + Math.random() * 0.05) * DPR
+    //     });
+    //   }
+    // }
+    // buildStars();
+    // addEventListener("resize", buildStars);
 
-    let last = 0;
-    function draw(ts) {
-      const mobile = isMobile();
-      const fps = mobile ? 30 : 60;
-      const interval = 1000 / fps;
-      if (ts - last < interval) { requestAnimationFrame(draw); return; }
-      last = ts;
+    // let last = 0;
+    // function draw(ts) {
+    //   const mobile = isMobile();
+    //   const fps = mobile ? 30 : 60;
+    //   const interval = 1000 / fps;
+    //   if (ts - last < interval) { requestAnimationFrame(draw); return; }
+    //   last = ts;
 
-      ctx.clearRect(0, 0, W, H);
+    //   ctx.clearRect(0, 0, W, H);
 
-      const g1 = ctx.createRadialGradient(W * 0.20, H * 0.18, 0, W * 0.20, H * 0.18, W * 0.70);
-      g1.addColorStop(0, "rgba(255,184,206,0.12)");
-      g1.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = g1;
-      ctx.fillRect(0, 0, W, H);
+    //   const g1 = ctx.createRadialGradient(W * 0.20, H * 0.18, 0, W * 0.20, H * 0.18, W * 0.70);
+    //   g1.addColorStop(0, "rgba(255,184,206,0.12)");
+    //   g1.addColorStop(1, "rgba(0,0,0,0)");
+    //   ctx.fillStyle = g1;
+    //   ctx.fillRect(0, 0, W, H);
 
-      for (const s of stars) {
-        s.a += s.tw * (Math.random() > 0.5 ? 1 : -1);
-        s.a = Math.max(0.12, Math.min(0.85, s.a));
+    //   for (const s of stars) {
+    //     s.a += s.tw * (Math.random() > 0.5 ? 1 : -1);
+    //     s.a = Math.max(0.12, Math.min(0.85, s.a));
 
-        s.x += s.vx; s.y += s.vy;
-        if (s.y > H + 30) { s.y = -30; s.x = Math.random() * W; }
-        if (s.x < -30) s.x = W + 30;
-        if (s.x > W + 30) s.x = -30;
+    //     s.x += s.vx; s.y += s.vy;
+    //     if (s.y > H + 30) { s.y = -30; s.x = Math.random() * W; }
+    //     if (s.x < -30) s.x = W + 30;
+    //     if (s.x > W + 30) s.x = -30;
 
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(255,255,255,${s.a})`;
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fill();
+    //     ctx.beginPath();
+    //     ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+    //     ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    //     ctx.fill();
 
-        if (s.a > 0.70) {
-          ctx.strokeStyle = `rgba(255,214,170,${s.a * 0.42})`;
-          ctx.lineWidth = 1 * DPR;
-          ctx.beginPath();
-          ctx.moveTo(s.x - 6 * DPR, s.y);
-          ctx.lineTo(s.x + 6 * DPR, s.y);
-          ctx.moveTo(s.x, s.y - 6 * DPR);
-          ctx.lineTo(s.x, s.y + 6 * DPR);
-          ctx.stroke();
-        }
-      }
+    //     if (s.a > 0.70) {
+    //       ctx.strokeStyle = `rgba(255,214,170,${s.a * 0.42})`;
+    //       ctx.lineWidth = 1 * DPR;
+    //       ctx.beginPath();
+    //       ctx.moveTo(s.x - 6 * DPR, s.y);
+    //       ctx.lineTo(s.x + 6 * DPR, s.y);
+    //       ctx.moveTo(s.x, s.y - 6 * DPR);
+    //       ctx.lineTo(s.x, s.y + 6 * DPR);
+    //       ctx.stroke();
+    //     }
+    //   }
 
-      requestAnimationFrame(draw);
-    }
-    requestAnimationFrame(draw);
+    //   requestAnimationFrame(draw);
+    // }
+    // requestAnimationFrame(draw);
 
     // =========================
     // Calendar render
@@ -2782,7 +2782,7 @@
 
       }, 2000);
 
-    },);
+    });
     // Hàm bổ trợ để đảm bảo Main luôn hiện
 
     function setupScrollReveal() {
