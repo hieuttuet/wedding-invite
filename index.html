@@ -2206,6 +2206,9 @@
       transform: translateY(-2px);
     }
 
+    .gift-icon svg {
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .25));
+    }
 
     /* =========================
    FOOTER NOTE
@@ -2493,7 +2496,21 @@
       </div>
       <div class="gift-open-wrap">
         <div class="gift-box-btn" id="openGift">
-          <div class="gift-icon">🧧</div>
+          <div class="gift-icon">
+
+            <svg viewBox="0 0 64 64" width="46" height="46">
+
+              <rect x="8" y="14" width="48" height="36" rx="6" fill="#ff3b30" />
+
+              <polygon points="8,14 32,34 56,14" fill="#d62828" />
+
+              <circle cx="32" cy="30" r="6" fill="#ffd700" />
+
+              <text x="32" y="34" text-anchor="middle" font-size="8" fill="#d62828" font-weight="bold">福</text>
+
+            </svg>
+
+          </div>
           <div class="gift-text">Hộp Mừng Cưới</div>
         </div>
       </div>
