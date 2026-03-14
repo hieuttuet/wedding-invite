@@ -1261,22 +1261,51 @@
       display: none
     }
 
-    .toast {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 18px;
-      z-index: 2200;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(110, 20, 20, .18);
-      background: rgba(255, 255, 255, .92);
-      color: var(--wine);
-      display: none;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .12);
-      font-weight: 900;
-      font-family: "Playfair Display", serif;
-    }
+    #toast{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9999;
+}
+
+.toast-message{
+  min-width:200px;
+  padding:10px 18px;
+  margin-top:10px;
+
+  background:rgba(112, 16, 16, 0.8);
+  color:white;
+
+  font-size:14px;
+  text-align:center;
+
+  border-radius:30px;
+
+  backdrop-filter:blur(10px);
+
+  animation:toastIn 0.4s ease, toastOut 0.4s ease 2.1s;
+}
+
+@keyframes toastIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes toastOut{
+  from{
+    opacity:1;
+  }
+  to{
+    opacity:0;
+  }
+}
 
     /* little shake */
     @keyframes shake {
@@ -2070,7 +2099,7 @@
       align-items: center;
       justify-content: center;
 
-      z-index: 9999;
+      z-index: 9998;
     }
 
     .gift-modal-box {
@@ -2597,7 +2626,7 @@
       </div>
     </section>
   </div>
-  <div class="toast" id="toast">OK</div>
+  <div class="toast" id="toast"></div>
   <!-- Wedding Gift Modal -->
   <div class="gift-modal" id="giftModal">
 
@@ -2610,7 +2639,7 @@
 
       <div class="gift-modal-body">
 
-        <div class="gift-item">
+        <div class="gift-item" data-owner="groom">
           <div class="gift-title">Chú Rể - Trung Hiếu</div>
 
           <img src="img/qr_groom.jpg" class="gift-qr">
@@ -2623,7 +2652,7 @@
           <button class="gift-save">Lưu STK</button>
         </div>
 
-        <div class="gift-item">
+        <div class="gift-item" data-owner="bride">
           <div class="gift-title">Cô Dâu - Quỳnh Thuận</div>
 
           <img src="img/qr_bride.jpg" class="gift-qr">
@@ -2709,13 +2738,23 @@
     document.getElementById("btnMapBride").href = BRIDE_PARTY.map;
 
     // Helpers
-    function showToast(text) {
-      const t = document.getElementById("toast");
-      t.textContent = text;
-      t.style.display = "block";
-      clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => t.style.display = "none", 1900);
-    }
+    function showToast(message){
+
+  const toastBox = document.getElementById("toast");
+
+  const toast = document.createElement("div");
+
+  toast.className = "toast-message";
+
+  toast.innerText = message;
+
+  toastBox.appendChild(toast);
+
+  setTimeout(()=>{
+    toast.remove();
+  },2500);
+
+}
     function isMobile() {
       return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || innerWidth < 820;
     }
@@ -3442,7 +3481,7 @@
 
     document.querySelectorAll(".gift-save").forEach(btn => {
 
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click",async  () => {
 
     const parent = btn.closest(".gift-item");
 
@@ -3453,11 +3492,11 @@
     navigator.clipboard.writeText(bankNumber);
 
     if (owner === "groom") {
-      alert("Đã lưu STK Chú Rể");
+      showToast("💙 Đã copy ");
     }
 
     if (owner === "bride") {
-      alert("Đã lưu STK Cô Dâu" );
+      showToast("💙 Đã copy " );
     }
 
   });
