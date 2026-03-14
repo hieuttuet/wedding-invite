@@ -1987,7 +1987,7 @@
 
     .gift-box-btn {
       position: relative;
-      width: 120px;
+      width: 150px;
       height: 120px;
       margin: auto;
 
@@ -2030,15 +2030,29 @@
     }
 
     .gift-icon {
-      font-size: 40px;
+      font-size: 45px;
     }
 
     .gift-text {
-      margin-top: 8px;
+      margin-top: 5px;
       font-size: 15px;
       letter-spacing: .6px;
     }
 
+    @media(max-width:520px) {
+      .gift-box-btn {
+        width: 120px;
+        height: 90px;
+      }
+
+      .gift-icon {
+        font-size: 30px;
+      }
+
+      .gift-text {
+        font-size: 13px;
+      }
+    }
 
     /* =========================
    MODAL
@@ -2092,7 +2106,7 @@
       background: linear-gradient(135deg, #b22a2a, #d24a4a);
       color: white;
 
-      padding: 18px;
+      padding: 15px;
       font-size: 22px;
       letter-spacing: .5px;
       text-align: center;
@@ -2121,9 +2135,9 @@
     .gift-modal-body {
 
       display: flex;
-      gap: 30px;
+      gap: 25px;
 
-      padding: 28px;
+      padding: 23px;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -2160,7 +2174,7 @@
     .gift-title {
       font-weight: 600;
       font-size: 16px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       color: #333;
     }
 
@@ -2176,6 +2190,16 @@
       font-size: 13px;
       color: #080808;
       line-height: 1.5;
+    }
+@media(max-width:520px) {
+.gift-item {
+
+      width: 220px;
+      padding: 15px;
+}
+.gift-qr {
+  margin: 5px
+}
     }
 
 
@@ -2219,6 +2243,12 @@
       padding: 16px 20px 22px;
       font-size: 14px;
       color: #000000;
+    }
+
+    @media(max-width:520px) {
+      .gift-note {
+        font-size:12px;
+      }
     }
   </style>
 </head>
