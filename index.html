@@ -7,19 +7,19 @@
   <title>Thiệp cưới | Trung Hiếu & Quỳnh Thuận</title>
   <meta name="description" content="Thiệp mời lễ cưới Trung Hiếu & Quỳnh Thuận" />
   <!-- Open Graph (hiển thị preview khi gửi link) -->
-<meta property="og:title" content="💍 Trung Hiếu & Quỳnh Thuận | Wedding Invitation" />
-<meta property="og:description" content="Trân trọng kính mời bạn đến chung vui trong ngày cưới của chúng mình." />
-<meta property="og:image" content="https://hieuttuet.github.io/wedding-invite/cover.jpg" />
-<meta property="og:url" content="https://hieuttuet.github.io/wedding-invite/" />
-<meta property="og:type" content="website" />
-<meta property="og:locale" content="vi_VN" />
-<meta property="og:site_name" content="Thiệp cưới Trung Hiếu & Quỳnh Thuận" />
+  <meta property="og:title" content="💍 Trung Hiếu & Quỳnh Thuận | Wedding Invitation" />
+  <meta property="og:description" content="Trân trọng kính mời bạn đến chung vui trong ngày cưới của chúng mình." />
+  <meta property="og:image" content="https://hieuttuet.github.io/wedding-invite/cover.jpg" />
+  <meta property="og:url" content="https://hieuttuet.github.io/wedding-invite/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:site_name" content="Thiệp cưới Trung Hiếu & Quỳnh Thuận" />
 
-<!-- Twitter / Messenger preview -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="💍 Trung Hiếu & Quỳnh Thuận | Wedding Invitation" />
-<meta name="twitter:description" content="Trân trọng kính mời bạn đến chung vui trong ngày cưới của chúng mình." />
-<meta name="twitter:image" content="https://hieuttuet.github.io/wedding-invite/cover.jpg" />
+  <!-- Twitter / Messenger preview -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="💍 Trung Hiếu & Quỳnh Thuận | Wedding Invitation" />
+  <meta name="twitter:description" content="Trân trọng kính mời bạn đến chung vui trong ngày cưới của chúng mình." />
+  <meta name="twitter:image" content="https://hieuttuet.github.io/wedding-invite/cover.jpg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -774,17 +774,19 @@
       line-height: 1.7;
       color: rgba(28, 15, 20, .78);
     }
-.m-quote span{
-  opacity:0;
-  display:inline-block;
-  transform: translateY(8px);
-  transition: all .45s ease;
-}
 
-.m-quote span.show{
-  opacity:1;
-  transform: translateY(0);
-}
+    .m-quote span {
+      opacity: 0;
+      display: inline-block;
+      transform: translateY(8px);
+      transition: all .45s ease;
+    }
+
+    .m-quote span.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .m-sign {
       font-family: "Great Vibes", cursive;
       color: rgba(110, 20, 20, .92);
@@ -892,11 +894,13 @@
         height: 500px;
       }
     }
-@media(min-width:700px) {
+
+    @media(min-width:700px) {
       .gimg img {
         height: 700px;
       }
     }
+
     .withyou {
       font-family: "Playfair Display", serif;
       text-align: center;
@@ -1038,7 +1042,7 @@
       background: rgba(255, 255, 255, .92);
       color: var(--wine);
       border: 1px solid rgba(110, 20, 20, .25);
-      box-shadow: 0 14px 40px rgba(0,0,0,.18);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, .18);
       text-align: center;
       transition: all .8s cubic-bezier(.22, .61, .36, 1);
       overflow: visible;
@@ -1951,6 +1955,7 @@
       }
 
     }
+
     @media (max-width:320px) {
       .wedding-photos {
         gap: 3px;
@@ -1964,12 +1969,253 @@
       }
 
       .photo.center {
-        width:50px;
+        width: 50px;
         height: 110px;
       }
 
     }
 
+    /* =========================
+   GIFT BUTTON
+========================= */
+
+.gift-open-wrap{
+  text-align:center;
+  margin-top:30px;
+  margin-bottom:30px;
+}
+
+.gift-box-btn{
+  position:relative;
+  width:120px;
+  height:120px;
+  margin:auto;
+
+  background:linear-gradient(145deg,#b91616,#e93b3b);
+  border-radius:22px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  color:#fff;
+  cursor:pointer;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.25),
+    inset 0 0 10px rgba(255,255,255,.15);
+
+  transition:.35s;
+}
+
+/* ánh sáng vàng */
+
+.gift-box-btn::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:24px;
+  background:linear-gradient(45deg,#ffd700,#ffae00,#ffd700);
+  opacity:.25;
+  filter:blur(12px);
+  z-index:-1;
+}
+
+.gift-box-btn:hover{
+  transform:translateY(-8px) scale(1.05);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.35),
+    inset 0 0 12px rgba(255,255,255,.25);
+}
+
+.gift-icon{
+  font-size:40px;
+}
+
+.gift-text{
+  margin-top:8px;
+  font-size:15px;
+  letter-spacing:.6px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.gift-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(83, 82, 82, 0.55);
+  backdrop-filter:blur(4px);
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  z-index:9999;
+}
+
+.gift-modal-box{
+
+  width:92%;
+  max-width:720px;
+
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+
+  box-shadow:0 25px 70px rgba(0,0,0,.35);
+
+  animation:giftFade .45s ease;
+}
+
+@keyframes giftFade{
+  from{
+    opacity:0;
+    transform:scale(.9) translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.gift-modal-header{
+  background:linear-gradient(135deg,#b22a2a,#d24a4a);
+  color:white;
+
+  padding:18px;
+  font-size:22px;
+  letter-spacing:.5px;
+  text-align:center;
+
+  position:relative;
+}
+
+.gift-close{
+  position:absolute;
+  right:16px;
+  top:12px;
+  font-size:22px;
+  cursor:pointer;
+  opacity:.8;
+}
+
+.gift-close:hover{
+  opacity:1;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+.gift-modal-body{
+
+  display:flex;
+  gap:30px;
+
+  padding:28px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+
+/* =========================
+   QR CARD
+========================= */
+
+.gift-item{
+
+  width:250px;
+  padding:20px;
+
+  border-radius:14px;
+
+  background:#f1ebeb;
+  border: 2px #a55050;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.08),
+    inset 0 0 6px rgba(0,0,0,.05);
+
+  text-align:center;
+
+  transition:.3s;
+}
+
+.gift-item:hover{
+  transform:translateY(-6px);
+  box-shadow:
+    0 16px 35px rgba(0,0,0,.15);
+}
+
+.gift-title{
+  font-weight:600;
+  font-size:16px;
+  margin-bottom:12px;
+  color:#333;
+}
+
+.gift-qr{
+  width:170px;
+  height:140px;
+  border-radius:12px;
+  margin:10px 0;
+  box-shadow:0 6px 16px rgba(0,0,0,.15);
+}
+
+.gift-bank{
+  font-size:13px;
+  color:#080808;
+  line-height:1.5;
+}
+
+
+/* =========================
+   SAVE BUTTON
+========================= */
+
+.gift-save{
+
+  margin-top:12px;
+  border:none;
+  padding:7px 16px;
+
+  border-radius:10px;
+
+  background:linear-gradient(135deg,#c53b3b,#e75a5a);
+  color:white;
+
+  font-size:13px;
+  cursor:pointer;
+
+  box-shadow:0 6px 14px rgba(0,0,0,.18);
+
+  transition:.25s;
+}
+
+.gift-save:hover{
+  transform:translateY(-2px);
+}
+
+
+/* =========================
+   FOOTER NOTE
+========================= */
+
+.gift-note{
+  text-align:center;
+  padding:16px 20px 22px;
+  font-size:14px;
+  color:#000000;
+}
   </style>
 </head>
 
@@ -2244,7 +2490,12 @@
       <div class="withyou-sub">
         Every moment of every day, loving and missing you fills every corner of my heart.
       </div>
-
+      <div class="gift-open-wrap">
+        <div class="gift-box-btn" id="openGift">
+          <div class="gift-icon">🧧</div>
+          <div class="gift-text">Hộp Mừng Cưới</div>
+        </div>
+      </div>
       <div
         style="text-align:center; padding: 8px 0 16px; font-size: 20px ; color: rgba(110,20,20,.70); font-family:'Great Vibes',cursive;">
         Hẹn gặp bạn trong ngày vui của chúng mình 💚
@@ -2252,7 +2503,53 @@
     </section>
   </div>
   <div class="toast" id="toast">OK</div>
+  <!-- Wedding Gift Modal -->
+  <div class="gift-modal" id="giftModal">
 
+    <div class="gift-modal-box">
+
+      <div class="gift-modal-header">
+        Hộp Mừng Cưới
+        <span class="gift-close" id="closeGift">✕</span>
+      </div>
+
+      <div class="gift-modal-body">
+
+        <div class="gift-item">
+          <div class="gift-title">Chú Rể - Trung Hiếu</div>
+
+          <img src="img/qr_groom.jpg" class="gift-qr">
+
+          <div class="gift-bank">
+            Trung Hiếu<br>
+            BIDV • 2152313426
+          </div>
+
+          <button class="gift-save">Lưu QR</button>
+        </div>
+
+        <div class="gift-item">
+          <div class="gift-title">Cô Dâu - Quỳnh Thuận</div>
+
+          <img src="img/qr_bride.jpg" class="gift-qr">
+
+          <div class="gift-bank">
+            Quỳnh Thuận<br>
+            Shinhan Bank • 700031781411
+          </div>
+
+          <button class="gift-save">Lưu QR</button>
+        </div>
+
+      </div>
+
+      <div class="gift-note">
+        Cảm ơn bạn đã đồng hành cùng chúng mình trong ngày trọng đại!
+      </div>
+
+    </div>
+
+  </div>
   <script>
     // =========================
     // CONFIG (SỬA Ở ĐÂY)
@@ -2874,24 +3171,24 @@
         mo.observe(main, { attributes: true, attributeFilter: ["class"] });
       }
     }
-function typeWords(el){
+    function typeWords(el) {
 
-  const text = el.textContent.trim();
-  el.innerHTML = "";
+      const text = el.textContent.trim();
+      el.innerHTML = "";
 
-  const words = text.split(" ");
+      const words = text.split(" ");
 
-  words.forEach((word,i)=>{
-    const span = document.createElement("span");
-    span.innerHTML = word + "&nbsp;";
-    el.appendChild(span);
+      words.forEach((word, i) => {
+        const span = document.createElement("span");
+        span.innerHTML = word + "&nbsp;";
+        el.appendChild(span);
 
-    setTimeout(()=>{
-      span.classList.add("show");
-    }, i*150); // tốc độ hiện từng từ
-  });
+        setTimeout(() => {
+          span.classList.add("show");
+        }, i * 150); // tốc độ hiện từng từ
+      });
 
-}
+    }
     runRevealWhenMainReady();
     function initMomentReveal() {
       const moments = document.querySelectorAll(".moment");
@@ -2907,11 +3204,11 @@ function typeWords(el){
 
             if (quote && !quote.classList.contains("typed")) {
 
-  quote.classList.add("typed");
+              quote.classList.add("typed");
 
-  typeWords(quote);
+              typeWords(quote);
 
-}
+            }
 
           } else {
             entry.target.classList.remove("show");
@@ -3020,6 +3317,41 @@ function typeWords(el){
 
       photos.forEach(p => io.observe(p));
     }
+    const openGift = document.getElementById("openGift");
+    const giftModal = document.getElementById("giftModal");
+    const closeGift = document.getElementById("closeGift");
+
+    openGift.addEventListener("click", () => {
+      giftModal.style.display = "flex";
+    });
+
+    closeGift.addEventListener("click", () => {
+      giftModal.style.display = "none";
+    });
+
+    giftModal.addEventListener("click", e => {
+      if (e.target === giftModal) {
+        giftModal.style.display = "none";
+      }
+    });
+    document.querySelectorAll(".gift-save").forEach(btn => {
+
+  btn.addEventListener("click", function(){
+
+    const qrImg = this.parentElement.querySelector(".gift-qr");
+
+    const link = document.createElement("a");
+
+    link.href = qrImg.src;
+    link.download = "QR-Wedding.png";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+  });
+
+});
   </script>
 </body>
 
