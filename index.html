@@ -3317,6 +3317,8 @@
 
       photos.forEach(p => io.observe(p));
     }
+
+    // hop qua
     const openGift = document.getElementById("openGift");
     const giftModal = document.getElementById("giftModal");
     const closeGift = document.getElementById("closeGift");
@@ -3336,18 +3338,25 @@
     });
     document.querySelectorAll(".gift-save").forEach(btn => {
 
-  btn.addEventListener("click", function(){
+  btn.addEventListener("click", async function(){
 
     const qrImg = this.parentElement.querySelector(".gift-qr");
+    const url = qrImg.src;
 
-    const link = document.createElement("a");
+    const response = await fetch(url);
+    const blob = await response.blob();
 
-    link.href = qrImg.src;
-    link.download = "QR-Wedding.png";
+    const blobUrl = URL.createObjectURL(blob);
 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = "QR-Wedding.png";
+
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    URL.revokeObjectURL(blobUrl);
 
   });
 
