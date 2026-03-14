@@ -1991,7 +1991,7 @@
       height: 120px;
       margin: auto;
 
-      background: linear-gradient(145deg, #b91616, #e93b3b);
+      background: linear-gradient(145deg, #ac1515, #c73434);
       border-radius: 22px;
 
       display: flex;
@@ -2258,6 +2258,45 @@
         font-size: 12px
       }
     }
+    /* Nền đen phía sau khi zoom */
+.zoom-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999; /* Đảm bảo đè lên trên gift-modal của bạn */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+/* Ảnh khi được phóng to */
+.zoom-content {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  animation: zoomIn 0.3s ease;
+}
+
+/* Nút đóng */
+.zoom-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Hiệu ứng mượt khi hiện ảnh */
+@keyframes zoomIn {
+  from {transform: scale(0.5); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
   </style>
 </head>
 
@@ -2578,10 +2617,10 @@
 
           <div class="gift-bank">
             Trung Hiếu<br>
-            BIDV • 2152313426
+            BIDV • <span class="bank-number">2152313426</span>
           </div>
 
-          <button class="gift-save">Lưu QR</button>
+          <button class="gift-save">Lưu STK</button>
         </div>
 
         <div class="gift-item">
@@ -2591,10 +2630,10 @@
 
           <div class="gift-bank">
             Quỳnh Thuận<br>
-            Shinhan Bank • 700031781411
+            Shinhan Bank • <span class="bank-number">700031781411</span>
           </div>
 
-          <button class="gift-save">Lưu QR</button>
+          <button class="gift-save">Lưu STK</button>
         </div>
 
       </div>
@@ -2606,6 +2645,10 @@
     </div>
 
   </div>
+  <div id="imageZoomModal" class="zoom-modal">
+  <span class="zoom-close">&times;</span>
+  <img class="zoom-content" id="imgFull">
+</div>
   <script>
     // =========================
     // CONFIG (SỬA Ở ĐÂY)
@@ -3397,41 +3440,52 @@
     });
 
 
-    document.querySelectorAll(".gift-save, .gift-qr").forEach(element => {
-      element.addEventListener("click", async function (e) {
-        // Ngăn chặn hành động mặc định nếu là click vào ảnh
-        e.preventDefault();
+    document.querySelectorAll(".gift-save").forEach(btn => {
 
-        // Tìm ảnh QR (nếu click vào nút thì tìm trong parent, nếu click vào ảnh thì chính là nó)
-        const qrImg = this.classList.contains('gift-qr') ? this : this.parentElement.querySelector(".gift-qr");
-        const url = qrImg.src;
+  btn.addEventListener("click", () => {
 
-        try {
-          // 1. Fetch lấy dữ liệu ảnh
-          const response = await fetch(url);
-          const blob = await response.blob();
+    const parent = btn.closest(".gift-item");
 
-          // 2. Tạo một đường dẫn tạm thời cho Blob
-          const blobUrl = window.URL.createObjectURL(blob);
+    const bankNumber = parent.querySelector(".bank-number").innerText;
 
-          // 3. Tạo thẻ a ẩn để kích hoạt tải xuống
-          const a = document.createElement("a");
-          a.href = blobUrl;
-          a.download = "QR-Wedding.png"; // Tên file muốn lưu
-          document.body.appendChild(a);
-          a.click();
+    const owner = parent.dataset.owner;
 
-          // 4. Dọn dẹp
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(blobUrl);
-        } catch (error) {
-          console.error("Lỗi tải ảnh:", error);
-          // Phương án dự phòng cho trình duyệt cũ hoặc lỗi CORS
-          window.open(url, "_blank");
-          alert("Bạn hãy nhấn giữ vào ảnh để lưu QR nhé! ❤️");
-        }
-      });
-    });
+    navigator.clipboard.writeText(bankNumber);
+
+    if (owner === "groom") {
+      alert("Đã lưu STK Chú Rể");
+    }
+
+    if (owner === "bride") {
+      alert("Đã lưu STK Cô Dâu" );
+    }
+
+  });
+
+});
+const zoomModal = document.getElementById("imageZoomModal");
+const imgFull = document.getElementById("imgFull");
+const closeZoom = document.querySelector(".zoom-close");
+
+// Lắng nghe click vào tất cả ảnh QR
+document.querySelectorAll(".gift-qr").forEach(img => {
+  img.addEventListener("click", function(e) {
+    // Ngăn chặn sự kiện click lan ra ngoài nếu cần
+    e.stopPropagation();
+
+    zoomModal.style.display = "flex";
+    imgFull.src = this.src;
+  });
+});
+
+// Click vào nút X hoặc click ra ngoài ảnh để đóng
+zoomModal.addEventListener("click", () => {
+  zoomModal.style.display = "none";
+});
+
+closeZoom.addEventListener("click", () => {
+  zoomModal.style.display = "none";
+});
   </script>
 </body>
 
