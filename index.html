@@ -1979,243 +1979,244 @@
    GIFT BUTTON
 ========================= */
 
-.gift-open-wrap{
-  text-align:center;
-  margin-top:30px;
-  margin-bottom:30px;
-}
+    .gift-open-wrap {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
 
-.gift-box-btn{
-  position:relative;
-  width:120px;
-  height:120px;
-  margin:auto;
+    .gift-box-btn {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: auto;
 
-  background:linear-gradient(145deg,#b91616,#e93b3b);
-  border-radius:22px;
+      background: linear-gradient(145deg, #b91616, #e93b3b);
+      border-radius: 22px;
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-  color:#fff;
-  cursor:pointer;
+      color: #fff;
+      cursor: pointer;
 
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.25),
-    inset 0 0 10px rgba(255,255,255,.15);
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, .25),
+        inset 0 0 10px rgba(255, 255, 255, .15);
 
-  transition:.35s;
-}
+      transition: .35s;
+    }
 
-/* ánh sáng vàng */
+    /* ánh sáng vàng */
 
-.gift-box-btn::before{
-  content:"";
-  position:absolute;
-  inset:-6px;
-  border-radius:24px;
-  background:linear-gradient(45deg,#ffd700,#ffae00,#ffd700);
-  opacity:.25;
-  filter:blur(12px);
-  z-index:-1;
-}
+    .gift-box-btn::before {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 24px;
+      background: linear-gradient(45deg, #ffd700, #ffae00, #ffd700);
+      opacity: .25;
+      filter: blur(12px);
+      z-index: -1;
+    }
 
-.gift-box-btn:hover{
-  transform:translateY(-8px) scale(1.05);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,.35),
-    inset 0 0 12px rgba(255,255,255,.25);
-}
+    .gift-box-btn:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, .35),
+        inset 0 0 12px rgba(255, 255, 255, .25);
+    }
 
-.gift-icon{
-  font-size:40px;
-}
+    .gift-icon {
+      font-size: 40px;
+    }
 
-.gift-text{
-  margin-top:8px;
-  font-size:15px;
-  letter-spacing:.6px;
-}
+    .gift-text {
+      margin-top: 8px;
+      font-size: 15px;
+      letter-spacing: .6px;
+    }
 
 
-/* =========================
+    /* =========================
    MODAL
 ========================= */
 
-.gift-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(83, 82, 82, 0.55);
-  backdrop-filter:blur(4px);
+    .gift-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(83, 82, 82, 0.55);
+      backdrop-filter: blur(4px);
 
-  display:none;
-  align-items:center;
-  justify-content:center;
+      display: none;
+      align-items: center;
+      justify-content: center;
 
-  z-index:9999;
-}
+      z-index: 9999;
+    }
 
-.gift-modal-box{
+    .gift-modal-box {
 
-  width:92%;
-  max-width:720px;
+      width: 92%;
+      max-width: 720px;
 
-  background:#fff;
-  border-radius:20px;
-  overflow:hidden;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
 
-  box-shadow:0 25px 70px rgba(0,0,0,.35);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, .35);
 
-  animation:giftFade .45s ease;
-}
+      animation: giftFade .45s ease;
+    }
 
-@keyframes giftFade{
-  from{
-    opacity:0;
-    transform:scale(.9) translateY(30px);
-  }
-  to{
-    opacity:1;
-    transform:scale(1) translateY(0);
-  }
-}
+    @keyframes giftFade {
+      from {
+        opacity: 0;
+        transform: scale(.9) translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
 
 
-/* =========================
+    /* =========================
    HEADER
 ========================= */
 
-.gift-modal-header{
-  background:linear-gradient(135deg,#b22a2a,#d24a4a);
-  color:white;
+    .gift-modal-header {
+      background: linear-gradient(135deg, #b22a2a, #d24a4a);
+      color: white;
 
-  padding:18px;
-  font-size:22px;
-  letter-spacing:.5px;
-  text-align:center;
+      padding: 18px;
+      font-size: 22px;
+      letter-spacing: .5px;
+      text-align: center;
 
-  position:relative;
-}
+      position: relative;
+    }
 
-.gift-close{
-  position:absolute;
-  right:16px;
-  top:12px;
-  font-size:22px;
-  cursor:pointer;
-  opacity:.8;
-}
+    .gift-close {
+      position: absolute;
+      right: 16px;
+      top: 12px;
+      font-size: 22px;
+      cursor: pointer;
+      opacity: .8;
+    }
 
-.gift-close:hover{
-  opacity:1;
-}
+    .gift-close:hover {
+      opacity: 1;
+    }
 
 
-/* =========================
+    /* =========================
    BODY
 ========================= */
 
-.gift-modal-body{
+    .gift-modal-body {
 
-  display:flex;
-  gap:30px;
+      display: flex;
+      gap: 30px;
 
-  padding:28px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
+      padding: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
 
-/* =========================
+    /* =========================
    QR CARD
 ========================= */
 
-.gift-item{
+    .gift-item {
 
-  width:250px;
-  padding:20px;
+      width: 250px;
+      padding: 20px;
 
-  border-radius:14px;
+      border-radius: 14px;
 
-  background:#f1ebeb;
-  border: 2px #a55050;
-  box-shadow:
-    0 8px 20px rgba(0,0,0,.08),
-    inset 0 0 6px rgba(0,0,0,.05);
+      background: #f1ebeb;
+      border: 2px #a55050;
+      box-shadow:
+        0 8px 20px rgba(0, 0, 0, .08),
+        inset 0 0 6px rgba(0, 0, 0, .05);
 
-  text-align:center;
+      text-align: center;
 
-  transition:.3s;
-}
+      transition: .3s;
+    }
 
-.gift-item:hover{
-  transform:translateY(-6px);
-  box-shadow:
-    0 16px 35px rgba(0,0,0,.15);
-}
+    .gift-item:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 16px 35px rgba(0, 0, 0, .15);
+    }
 
-.gift-title{
-  font-weight:600;
-  font-size:16px;
-  margin-bottom:12px;
-  color:#333;
-}
+    .gift-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #333;
+    }
 
-.gift-qr{
-  width:170px;
-  height:140px;
-  border-radius:12px;
-  margin:10px 0;
-  box-shadow:0 6px 16px rgba(0,0,0,.15);
-}
+    .gift-qr {
+      width: 170px;
+      height: 140px;
+      border-radius: 12px;
+      margin: 10px 0;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, .15);
+    }
 
-.gift-bank{
-  font-size:13px;
-  color:#080808;
-  line-height:1.5;
-}
+    .gift-bank {
+      font-size: 13px;
+      color: #080808;
+      line-height: 1.5;
+    }
 
 
-/* =========================
+    /* =========================
    SAVE BUTTON
 ========================= */
 
-.gift-save{
+    .gift-save {
 
-  margin-top:12px;
-  border:none;
-  padding:7px 16px;
+      margin-top: 12px;
+      border: none;
+      padding: 7px 16px;
 
-  border-radius:10px;
+      border-radius: 10px;
 
-  background:linear-gradient(135deg,#c53b3b,#e75a5a);
-  color:white;
+      background: linear-gradient(135deg, #c53b3b, #e75a5a);
+      color: white;
 
-  font-size:13px;
-  cursor:pointer;
+      font-size: 13px;
+      cursor: pointer;
 
-  box-shadow:0 6px 14px rgba(0,0,0,.18);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, .18);
 
-  transition:.25s;
-}
+      transition: .25s;
+    }
 
-.gift-save:hover{
-  transform:translateY(-2px);
-}
+    .gift-save:hover {
+      transform: translateY(-2px);
+    }
 
 
-/* =========================
+    /* =========================
    FOOTER NOTE
 ========================= */
 
-.gift-note{
-  text-align:center;
-  padding:16px 20px 22px;
-  font-size:14px;
-  color:#000000;
-}
+    .gift-note {
+      text-align: center;
+      padding: 16px 20px 22px;
+      font-size: 14px;
+      color: #000000;
+    }
   </style>
 </head>
 
@@ -3318,7 +3319,10 @@
       photos.forEach(p => io.observe(p));
     }
 
-    // hop qua
+    // ============================
+    // Gift modal
+    // ============================
+
     const openGift = document.getElementById("openGift");
     const giftModal = document.getElementById("giftModal");
     const closeGift = document.getElementById("closeGift");
@@ -3336,31 +3340,48 @@
         giftModal.style.display = "none";
       }
     });
+
+
+    // ============================
+    // Download QR
+    // ============================
+
     document.querySelectorAll(".gift-save").forEach(btn => {
 
-  btn.addEventListener("click", async function(){
+      btn.addEventListener("click", async function () {
 
-    const qrImg = this.parentElement.querySelector(".gift-qr");
-    const url = qrImg.src;
+        const qrImg = this.parentElement.querySelector(".gift-qr");
+        const url = qrImg.src;
 
-    const response = await fetch(url);
-    const blob = await response.blob();
+        try {
 
-    const blobUrl = URL.createObjectURL(blob);
+          const response = await fetch(url);
+          const blob = await response.blob();
 
-    const a = document.createElement("a");
-    a.href = blobUrl;
-    a.download = "QR-Wedding.png";
+          const blobUrl = URL.createObjectURL(blob);
 
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+          const a = document.createElement("a");
+          a.href = blobUrl;
+          a.download = "QR-Wedding.png";
 
-    URL.revokeObjectURL(blobUrl);
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
 
-  });
+          URL.revokeObjectURL(blobUrl);
 
-});
+        } catch (err) {
+
+          // fallback cho Messenger/Zalo
+          window.open(url, "_blank");
+
+          alert("Hãy nhấn giữ ảnh QR để lưu về máy ❤️");
+
+        }
+
+      });
+
+    });
   </script>
 </body>
 
