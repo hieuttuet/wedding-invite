@@ -2031,6 +2031,7 @@
 
     .gift-icon {
       font-size: 45px;
+      transform: scale(1.5);
     }
 
     .gift-text {
@@ -2047,6 +2048,7 @@
 
       .gift-icon {
         font-size: 30px;
+        transform: scale(1.1);
       }
 
       .gift-text {
@@ -2187,19 +2189,25 @@
     }
 
     .gift-bank {
-      font-size: 13px;
+      font-size: 16px;
       color: #080808;
       line-height: 1.5;
     }
-@media(max-width:520px) {
-.gift-item {
 
-      width: 220px;
-      padding: 15px;
-}
-.gift-qr {
-  margin: 5px
-}
+    @media(max-width:520px) {
+      .gift-item {
+
+        width: 220px;
+        padding: 15px;
+      }
+
+      .gift-qr {
+        margin: 5px
+      }
+
+      .gift-bank {
+        font-size: 13px;
+      }
     }
 
 
@@ -2247,7 +2255,7 @@
 
     @media(max-width:520px) {
       .gift-note {
-        font-size:12px;
+        font-size: 12px
       }
     }
   </style>
@@ -3389,45 +3397,40 @@
     });
 
 
-    // ============================
-    // Download QR
-    // ============================
+    document.querySelectorAll(".gift-save, .gift-qr").forEach(element => {
+      element.addEventListener("click", async function (e) {
+        // Ngăn chặn hành động mặc định nếu là click vào ảnh
+        e.preventDefault();
 
-    document.querySelectorAll(".gift-save").forEach(btn => {
-
-      btn.addEventListener("click", async function () {
-
-        const qrImg = this.parentElement.querySelector(".gift-qr");
+        // Tìm ảnh QR (nếu click vào nút thì tìm trong parent, nếu click vào ảnh thì chính là nó)
+        const qrImg = this.classList.contains('gift-qr') ? this : this.parentElement.querySelector(".gift-qr");
         const url = qrImg.src;
 
         try {
-
+          // 1. Fetch lấy dữ liệu ảnh
           const response = await fetch(url);
           const blob = await response.blob();
 
-          const blobUrl = URL.createObjectURL(blob);
+          // 2. Tạo một đường dẫn tạm thời cho Blob
+          const blobUrl = window.URL.createObjectURL(blob);
 
+          // 3. Tạo thẻ a ẩn để kích hoạt tải xuống
           const a = document.createElement("a");
           a.href = blobUrl;
-          a.download = "QR-Wedding.png";
-
+          a.download = "QR-Wedding.png"; // Tên file muốn lưu
           document.body.appendChild(a);
           a.click();
-          a.remove();
 
-          URL.revokeObjectURL(blobUrl);
-
-        } catch (err) {
-
-          // fallback cho Messenger/Zalo
+          // 4. Dọn dẹp
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(blobUrl);
+        } catch (error) {
+          console.error("Lỗi tải ảnh:", error);
+          // Phương án dự phòng cho trình duyệt cũ hoặc lỗi CORS
           window.open(url, "_blank");
-
-          alert("Hãy nhấn giữ ảnh QR để lưu về máy ❤️");
-
+          alert("Bạn hãy nhấn giữ vào ảnh để lưu QR nhé! ❤️");
         }
-
       });
-
     });
   </script>
 </body>
